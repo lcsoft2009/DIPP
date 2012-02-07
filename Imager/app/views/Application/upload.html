@@ -1,0 +1,77 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+
+#{if flash.error}
+    <p style="color:#c00">
+        ${flash.error}
+    </p>
+#{/if}
+<html>
+<head>
+<script type="text/javascript" src="../public/javascripts/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#hide").click(function(){
+  $("#div2").hide();
+  });
+});
+</script>
+    
+    
+  <script type="text/javascript">
+$(document).ready(function(){
+    $("#test").click(function(){
+   $("#div1").load('../public/files/urls.txt');
+  });
+    });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#show").click(function(){
+  $("#div2").show();
+  $("#div1").load('../public/files/urls.txt');
+     var myurl=$("#div1").text();
+      var arr=new Array();
+	arr=myurl.split(',');//注split可以用字符或字符串分割
+	for(var i=0;i<arr.length;i++)
+	{
+	$("#div2").append("<img src="+arr[i]+">");
+	}
+     
+   
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#show").click(function(){
+  $("#div2").show();
+  });
+});
+</script>
+
+ <body> 
+
+ <p id="p1">如果点击“隐藏”按钮，我就会消失。</p>
+<button id="hide" type="button">隐藏</button>
+<button id="show" type="button">显示</button>
+<button id="test"  type="button">test</button>
+<div id="div1">
+
+</div>
+<div id="div2"> 
+     <p  align="center">
+      <br />
+      <br />
+      <label for="code"  >The picture looks like -  </label>
+       <br />
+       <br />
+       <br />
+    </p>
+
+</div>    
+    </body>
+    </html>

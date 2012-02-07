@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/commons-el-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/commons-logging-api-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/commons-net-1.4.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/core-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/hadoop-0.20.2-ant.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/hadoop-0.20.2-core.jar" sourcepath="/home/hadoop/workspace/Downloader/lib/hadoop-0.20.2-core.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/hadoop-0.20.2-examples.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/hadoop-0.20.2-test.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/hadoop-0.20.2-tools.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/hsqldb-1.8.0.10.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/jasper-compiler-5.5.12.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/jasper-runtime-5.5.12.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/jets3t-0.6.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/jetty-6.1.14.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/jetty-util-6.1.14.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/kfs-0.2.2.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/mockito-all-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/servlet-api-2.5-6.1.14.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/slf4j-api-1.4.3.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/slf4j-log4j12-1.4.3.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/Downloader/lib/xmlenc-0.52.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/workspace/jpegfromhib/lib/metadata-extractor-2.3.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Downloader">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Downloader.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-ant.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-core.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-examples.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-test.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-tools.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-cli-1.2.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-codec-1.3.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-el-1.0.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-httpclient-3.0.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-logging-1.0.4.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-logging-api-1.0.4.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-net-1.4.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/core-3.1.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/hsqldb-1.8.0.10.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jasper-compiler-5.5.12.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jasper-runtime-5.5.12.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jets3t-0.6.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jetty-6.1.14.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jetty-util-6.1.14.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/junit-3.8.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/kfs-0.2.2.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/log4j-1.2.15.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/mockito-all-1.8.0.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/oro-2.0.8.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/servlet-api-2.5-6.1.14.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/slf4j-api-1.4.3.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/slf4j-log4j12-1.4.3.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/xmlenc-0.52.jar"/>
+        <pathelement location="../../../../usr/local/hipi-dev/release/hipi-0.0.1.jar"/>
+        <pathelement location="../../../../usr/local/hipi-dev/3rdparty/metadata-extractor-2.3.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/Download.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/download.jar"/>
+    </path>
+    <path id="run.Downloader.classpath">
+        <pathelement location="../.metadata/.plugins/org.apache.hadoop.eclipse/hadoop-conf-6301389025067082826"/>
+        <path refid="Downloader.classpath"/>
+    </path>
+	
+	  <target name="setup">
+	    <property name="hadoop.home" value="/usr/hadoop/" />
+	    <property name="hadoop.version" value="0.20.2" />
+	    <property name="hadoop.classpath" value="${hadoop.home}/hadoop-${hadoop.version}-core.jar" />
+	    <property name="metadata.jar" value="3rdparty/metadata-extractor-2.3.1.jar" />
+	  </target>
+	
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src" excludes="**/*.launch, **/*.java"/>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Downloader.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Downloader">
+        <java classname="com.hadoop.hipi.liangchu.Downloader" failonerror="true" fork="yes">
+            <arg line="hdfs://master:9000/user/hadoop/hipiInput  hdfs://master:9000/user/hadoop/hibout 1"/>
+            <classpath refid="run.Downloader.classpath"/>
+        </java>
+    </target>
+	  <target name="compile" depends="setup">
+	    <mkdir dir="bin" />
+	    <!-- Compile -->
+	    <javac target="1.6" nowarn="on" srcdir="${srcdir}:./src:./examples:./experiments" includes="${files}" destdir="./bin" classpath="${hadoop.classpath}:${metadata.jar}" />
+	    <!-- Create the jar -->
+	    <jar destfile="${jardir}/${jarfilename}" basedir="./bin">
+	      <zipfileset src="${metadata.jar}" />
+	      <manifest>
+		<attribute name="Main-Class" value="${mainclass}" />
+	      </manifest>
+	    </jar>
+	  </target>
+
+	  <!-- Computes the average image of a subset of the images via the CullMapper -->
+	  <target name="avgimgcull">
+	    <antcall target="compile">
+	      <param name="srcdir" value="experiments/hipi/experiments/averageimage" />
+	      <param name="files" value="AverageImageCull.java" />			
+	      <param name="jarfilename" value="averageimagecull.jar" />
+	      <param name="jardir" value="experiments" />
+	      <param name="mainclass" value="hipi.experiments.averageimage.AverageImageCull" />
+	    </antcall>
+	  </target>
+
+	  <!-- Create a sequence file from a HIB-->
+	  <target name="covariance">
+	    <antcall target="compile">
+	      <param name="srcdir" value="examples/hipi/examples/covariance" />
+	      <param name="files" value="Covariance.java" />			
+	      <param name="jarfilename" value="covariance.jar" />
+	      <param name="jardir" value="examples" />
+	      <param name="mainclass" value="hipi.examples.covariance.Covariance" />
+	    </antcall>
+	  </target>
+
+	  <!-- Create a sequence file from a HIB-->
+	  <target name="seqfile">
+	    <antcall target="compile">
+	      <param name="srcdir" value="examples/hipi/examples/createsequencefile" />
+	      <param name="files" value="CreateSequenceFile.java" />			
+	      <param name="jarfilename" value="createsequencefile.jar" />
+	      <param name="jardir" value="examples" />
+	      <param name="mainclass" value="hipi.examples.createsequencefile.CreateSequenceFile" />
+	    </antcall>
+	  </target>
+
+	  <!-- The distributed downloader, which takes a database of URL's and creates a HIB -->
+	  <target name="downloader">
+	    <antcall target="compile">
+	      <param name="srcdir" value="examples/hipi/examples/downloader" />
+	      <param name="files" value="DownloaderInputFormat.java, DownloaderRecordReader.java, Downloader.java" />
+	      <param name="jarfilename" value="downloader.jar" />
+	      <param name="jardir" value="examples" />
+	      <param name="mainclass" value="hipi.examples.downloader.Downloader" />
+	    </antcall>
+	  </target>
+
+	  <!-- Converts a set of images to grayscale -->
+	  <target name="im2gray">
+	    <antcall target="compile">
+	      <param name="srcdir" value="experiments/hipi/experiments/im2gray" />
+	      <param name="files" value="Im2Gray.java" />			
+	      <param name="jarfilename" value="im2gray.jar" />
+	      <param name="jardir" value="experiments" />
+	      <param name="mainclass" value="hipi.experiments.im2gray.Im2Gray" />
+	    </antcall>
+	  </target>
+
+	  <!-- Test the various input types for HIPI -->
+	  <target name="inputtest">
+	    <antcall target="compile">
+	      <param name="srcdir" value="experiments/hipi/experiments/inputtest" />
+	      <param name="files" value="InputTest.java" />			
+	      <param name="jarfilename" value="inputtest.jar" />
+	      <param name="jardir" value="experiments" />
+	      <param name="mainclass" value="hipi.experiments.inputtest.InputTest" />
+	    </antcall>
+	  </target>
+	  
+	  <!-- Extract a HIB into a folder and a sequence file of its constituent images -->
+	  <target name="hib2jpg">
+	    <antcall target="compile">
+	      <param name="srcdir" value="examples/hipi/examples/jpegfromhib" />
+	      <param name="files" value="JpegFromHib.java" />
+	      <param name="jarfilename" value="hib2jpg.jar" />
+	      <param name="jardir" value="examples" />
+	      <param name="mainclass" value="hipi.examples.jpegfromhib.JpegFromHib" />
+	    </antcall>
+	  </target>
+
+	  <!-- Dump some information about all of the information in a HIB -->
+	  <target name="dumphib">
+	    <antcall target="compile">
+	      <param name="srcdir" value="examples/hipi/examples/dumphib" />
+	      <param name="files" value="DumpHib.java" />
+	      <param name="jarfilename" value="dumphib.jar" />
+	      <param name="jardir" value="examples" />
+	      <param name="mainclass" value="hipi.examples.dumphib.DumpHib" />
+	    </antcall>
+	  </target>
+
+	  <target name="compileall" depends="avgimgcull, covariance, seqfile, downloader, im2gray, inputtest, hib2jpg, dumphib" />
+
+	  <target name="all" depends="compileall" />
+
+	  <!-- Clean -->
+	  <target name="clean">    
+	    <delete dir="bin" />
+	    <delete>
+	      <fileset dir="." includes="examples/*.jar,experiments/*.jar" />
+	    </delete>
+	  </target>
+</project>

@@ -1,0 +1,243 @@
+package controllers;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Random;
+
+import models.User;
+import play.Play;
+import play.data.validation.Valid;
+import play.mvc.Before;
+import play.mvc.Controller;
+
+public class Application extends Controller {
+    
+    @Before
+    static void addUser() {
+        User user = connected();
+        if(user != null) {
+            renderArgs.put("user", user);
+        }
+    }
+    
+    static User connected() {
+        if(renderArgs.get("user") != null) {
+            return renderArgs.get("user", User.class);
+        }
+        String username = session.get("user");
+        if(username != null) {
+            return User.find("byUsername", username).first();
+        } 
+        return null;
+    }
+    
+    // ~~
+
+    public static void index() {
+        if(connected() != null) {
+            Hotels.index();
+        }
+        render();
+    }
+    
+    public static void register() {
+        render();
+    }
+    
+    public static void saveUser(@Valid User user, String verifyPassword) {
+        validation.required(verifyPassword);
+        validation.equals(verifyPassword, user.password).message("Your password doesn't match");
+        if(validation.hasErrors()) {
+            render("@register", user, verifyPassword);
+        }
+        user.create();
+        session.put("user", user.username);
+        flash.success("Welcome, " + user.name);
+        Hotels.index();
+    }
+    
+    public static void login(String username, String password) {
+        User user = User.find("byUsernameAndPassword", username, password).first();
+        if(user != null) {
+            session.put("user", user.username);
+            flash.success("Welcome, " + user.name);
+            Hotels.index();         
+        }
+        // Oops
+        flash.put("username", username);
+        flash.error("Login failed");
+        index();
+    }
+    
+    public static void logout() {
+        session.clear();
+        index();
+    }
+    public static void uploadjson(File imgFile) {
+
+    	 //文件保存目录路径
+
+    	 
+
+    	 String savePath =  Play.applicationPath.toString()+Play.configuration.getProperty("newsImg.savePath", "false");
+
+    	 //文件保存目录URL
+
+    	 String saveUrl  =  Play.configuration.getProperty("newsImg.savePath", "false");
+
+    	 
+
+    	 //System.out.println("Play.configuration.getProperty(newsImg.fileTypes):"+Play.configuration.getProperty("newsImg.fileTypes", "false"));
+
+    	 //定义允许上传的文件扩展名
+
+    	 String[] fileTypes = (Play.configuration.getProperty("newsImg.fileTypes", "false")).trim().toString().split(",");
+
+    	 //最大文件大小
+
+    	 long maxSize = 1000000;
+
+    	 
+
+    	 if (imgFile != null) {
+
+    	 //检查目录
+
+    	 File uploadDir = new File(savePath);
+
+    	 if(!uploadDir.isDirectory()){
+
+    	 
+
+    		 flash.error("上传目录不存在。");
+
+    	 return;
+
+    	 }
+
+    	 //检查目录写权限
+
+    	 if(!uploadDir.canWrite()){
+
+    		 flash.error("上传目录没有写权限。");
+
+    	 return;
+
+    	 }
+
+    	 //创建文件夹
+
+    	 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+    	 String ymd = sdf.format(new Date());
+
+    	 savePath += ymd + "/";
+
+    	 saveUrl += ymd + "/";
+
+    	 File dirFile = new File(savePath);
+
+    	 if (!dirFile.exists()) {
+
+    	 dirFile.mkdirs();
+
+    	 }
+
+    	 //检查文件大小
+
+    	 
+
+    	 
+
+    	 if(imgFile.length() > maxSize){
+
+    		 flash.error("上传文件大小超过限制。");
+
+    	 return;
+
+    	 }
+
+    	 //检查扩展名
+
+    	 String fileExt = imgFile.getName().substring(imgFile.getName().lastIndexOf(".") + 1).toLowerCase();
+
+    	 // System.out.println("fileExt:"+fileExt);
+
+    	 if(!Arrays.<String>asList(fileTypes).contains(fileExt)){
+
+    		 flash.error("上传文件扩展名是不允许的扩展名。");
+
+    	 return;
+
+    	 }
+
+    	 
+
+    	// String ext = imgFile.getName().substring(
+
+    	// imgFile.getName().lastIndexOf("."));
+
+    	// String fileName = RandomStringUtils.random(8, true, true) + ext;
+
+    	 
+
+    	 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+
+    	 String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+
+    	 
+
+    	 File f = new File(savePath,newFileName);
+
+    	 
+
+    	 //System.out.println("f.getPath()----:" + f.getPath());
+
+    	 
+
+    	 try {
+
+    	 // System.out
+
+    	 // .println("imgFile.renameTo(f):" + imgFile.renameTo(f));
+
+    	 JSONObject obj = new JSONObject();
+
+    	 obj.put("error", 0);
+
+    	 obj.put("url", saveUrl + newFileName);
+
+    	 renderText(obj.toJSONString().toString());
+
+    	 
+
+    	 return;
+
+    	 } catch (Exception e) {
+
+    	 e.printStackTrace();
+
+    	 renderJSON(getError("上传失败"));
+
+    	 return;
+
+    	 }
+
+    	 
+
+    	 }else{
+
+    	 
+
+    	 renderJSON(getError("请选择文件。"));
+
+    	 return;
+
+    	 }
+
+    	 
+
+    	 }
+}

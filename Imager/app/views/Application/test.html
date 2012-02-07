@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript" src="../public/javascripts/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $("div").load('../public/files/urls.txt');
+  });
+});
+</script>
+</head>
+<body>
+
+<div><h2>通过 AJAX 来改变这段文本</h2></div>
+<button>改变内容</button>
+
+</body>
+</html>

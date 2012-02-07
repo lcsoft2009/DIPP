@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Downloader">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Downloader.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-ant.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-core.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-examples.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-test.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/hadoop-0.20.2-tools.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-cli-1.2.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-codec-1.3.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-el-1.0.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-httpclient-3.0.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-logging-1.0.4.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-logging-api-1.0.4.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/commons-net-1.4.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/core-3.1.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/hsqldb-1.8.0.10.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jasper-compiler-5.5.12.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jasper-runtime-5.5.12.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jets3t-0.6.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jetty-6.1.14.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/jetty-util-6.1.14.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/junit-3.8.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/kfs-0.2.2.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/log4j-1.2.15.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/mockito-all-1.8.0.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/oro-2.0.8.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/servlet-api-2.5-6.1.14.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/slf4j-api-1.4.3.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/slf4j-log4j12-1.4.3.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/lib/xmlenc-0.52.jar"/>
+        <pathelement location="../../../../usr/local/hipi-dev/release/hipi-0.0.1.jar"/>
+        <pathelement location="../../../../usr/local/hipi-dev/3rdparty/metadata-extractor-2.3.1.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/Download.jar"/>
+        <pathelement location="../../../../usr/local/hadoop/download.jar"/>
+    </path>
+    <path id="run.Downloader.classpath">
+        <pathelement location="../.metadata/.plugins/org.apache.hadoop.eclipse/hadoop-conf-6301389025067082826"/>
+        <path refid="Downloader.classpath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src" excludes="**/*.launch, **/*.java"/>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Downloader.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Downloader">
+        <java classname="com.hadoop.hipi.liangchu.Downloader" failonerror="true" fork="yes">
+            <arg line="hdfs://master:9000/user/hadoop/hipiInput  hdfs://master:9000/user/hadoop/hibout 1"/>
+            <classpath refid="run.Downloader.classpath"/>
+        </java>
+    </target>
+</project>
