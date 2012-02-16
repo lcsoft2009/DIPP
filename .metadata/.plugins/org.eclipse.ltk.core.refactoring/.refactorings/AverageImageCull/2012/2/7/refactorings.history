@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 package(s) to &apos;Im2Gray/src&apos;&#x0A;- Original project: &apos;AverageImageCull&apos;&#x0A;- Destination element: &apos;Im2Gray/src&apos;&#x0A;- Original element: &apos;AverageImageCull/src/hipi.experiments.mapreduce&apos;" description="Copy package" destination="/src" element1="/src&lt;hipi.experiments.mapreduce" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" log="/src&lt;hipi.experiments.mapreduce&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyPackages" stamp="1329376951760" version="1.0"/>
+</session>
