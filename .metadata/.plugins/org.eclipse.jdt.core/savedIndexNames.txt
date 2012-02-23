@@ -142,7 +142,6 @@ INDEX VERSION 1.121+/home/hadoop/workspace/.metadata/.plugins/org.eclipse.jdt.co
 105162038.index
 1690349354.index
 927879043.index
-2089348824.index
 3970312393.index
 1829943998.index
 3739993535.index

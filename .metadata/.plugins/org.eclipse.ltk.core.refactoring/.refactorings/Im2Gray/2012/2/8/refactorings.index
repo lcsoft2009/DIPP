@@ -6,3 +6,5 @@
 1329916456882	Rename type 'HelloServlet'
 1329916971381	Rename compilation unit 'HelloHandler.java'
 1329920469259	Delete element
+1329975595814	Rename package 'com.liangchu.servlet'
+1329975635966	Rename package 'fq'

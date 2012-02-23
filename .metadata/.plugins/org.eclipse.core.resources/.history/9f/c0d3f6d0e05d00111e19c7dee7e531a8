@@ -37,7 +37,7 @@ public class WebServer {
 		context.setResourceBase(System.getProperty("user.dir") + "/webapps");
 
 		// The SERVLET class and path.
-		context.addServlet(com.liangchu.http.servlet.HelloServlet.class,
+		context.addServlet(com.liangchu.servlet.HelloServlet.class,
 				"/myServlet");
 
 		// A ServletContextListener instance.
