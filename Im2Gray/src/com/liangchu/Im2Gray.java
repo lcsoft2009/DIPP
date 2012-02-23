@@ -1,6 +1,7 @@
 package com.liangchu;
 
 
+import	fq.*;
 import hipi.image.FloatImage;
 import hipi.image.ImageHeader;
 import hipi.image.io.ImageEncoder;
@@ -8,7 +9,11 @@ import hipi.image.io.JPEGImageUtil;
 import hipi.imagebundle.mapreduce.ImageBundleInputFormat;
 import hipi.imagebundle.mapreduce.output.BinaryOutputFormat;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -59,6 +64,15 @@ public class Im2Gray extends Configured implements Tool{
 				//note: images may have the same hash code
 				context.write(new IntWritable(0), gray);
 				
+				
+				
+		
+					//	BufferedImage imnext	=	ImageIO.read( new File("/home/hadoop/Desktop/image/"+1+".jpg") );
+	
+				
+				
+				
+				
 				//If we later decide we want to output the image
 				
 		/*		ImageEncoder encoder = JPEGImageUtil.getInstance();
@@ -73,8 +87,8 @@ public class Im2Gray extends Configured implements Tool{
 				encoder.encodeImage(gray, key, os);
 
 				os.flush();
-				os.close();
-			*/
+				os.close();*/
+		
 				 
 			}
 		//	else
@@ -107,12 +121,19 @@ public class Im2Gray extends Configured implements Tool{
 			FloatImage mean = new FloatImage(720, 478, 3);
 			int num_pics = 0;
 			for (FloatImage val : values) {
+				FqImage imh	=	new FqImage(val);
+				
 				mean.add(val);
+				FqImage imh2	=	new FqImage(mean);
+				double sss=imh2.getAbsColorDistance(imh);
+				
+					System.out.println(sss);
 				num_pics++;
 			}
 			float scale = 1.0f/num_pics;
 			mean.scale(scale);
 			System.out.println("Scale: " + scale);
+	
 			context.write(key, mean);
 			
 			

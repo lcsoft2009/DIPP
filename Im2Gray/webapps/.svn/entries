@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.apache.org/repos/asf"
+   name=""
+   revision="1232380"
+   last-author="omalley"
+   url="http://svn.apache.org/repos/asf/hadoop/common/branches/branch-0.20-security-203/src/webapps"
+   uuid="13f79535-47bb-0310-9956-ffa450edef68"
+   committed-rev="1086650"
+   kind="dir"
+   committed-date="2011-03-29T17:37:11.626099Z"/>
+<entry
+   name="datanode"
+   kind="dir"/>
+<entry
+   name="hdfs"
+   kind="dir"/>
+<entry
+   name="history"
+   kind="dir"/>
+<entry
+   name="job"
+   kind="dir"/>
+<entry
+   name="static"
+   kind="dir"/>
+<entry
+   name="task"
+   kind="dir"/>
+</wc-entries>

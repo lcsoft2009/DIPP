@@ -1,11 +1,16 @@
 package com.liangchu;
 
 
+import fq.FqImage;
 import hipi.image.ImageHeader.ImageType;
 import hipi.imagebundle.mapreduce.ImageBundleInputFormat;
 import hipi.util.ByteUtils;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -50,7 +55,26 @@ public class JpegFromHib extends Configured implements Tool{
 			os.flush();
 			os.close();
 			
-			long sig = 0<<2 | ImageType.JPEG_IMAGE.toValue();
+		/*	for( int i = 1 ; i <= 13; i++ ){
+				BufferedImage	im	=	ImageIO.read( new File("/home/hadoop/Desktop/image/"+i+".jpg") );
+				FqImage imh	=	new FqImage(im);
+				double minD=100000000;
+				int index=i;
+				for(int j=1;j<=13;j++)
+				{
+					BufferedImage imnext	=	ImageIO.read( new File("/home/hadoop/Desktop/image/"+j+".jpg") );
+					FqImage imh2	=	new FqImage(imnext);
+					double sss=imh.dColorJu(imh2);
+					System.out.println(sss+" "+j);
+					if(i!=j && minD>sss)
+					{
+						minD=sss;
+						index=j;
+					}  
+				}
+				System.out.print(i+"----------->"+index);
+			}	*/	
+		//	long sig = 0<<2 | ImageType.JPEG_IMAGE.toValue();
 			
 			//if you want the images to be output as a sequence file, emit the line below
 			//and change the output key and values appropriately

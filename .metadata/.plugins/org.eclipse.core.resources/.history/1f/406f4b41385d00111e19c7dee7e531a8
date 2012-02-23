@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.apache.org/repos/asf"
+   name=""
+   revision="1232380"
+   last-author="omalley"
+   url="http://svn.apache.org/repos/asf/hadoop/common/branches/branch-0.20-security-203/src/webapps/static"
+   uuid="13f79535-47bb-0310-9956-ffa450edef68"
+   committed-rev="1077535"
+   kind="dir"
+   committed-date="2011-03-04T04:25:50.761473Z"/>
+<entry
+   name="hadoop-logo.jpg"
+   checksum="00dad2633094e5e4cb6c952ac32e81fe"
+   last-author="cutting"
+   text-time="2006-05-19T23:45:16.000000Z"
+   committed-rev="407930"
+   kind="file"
+   committed-date="2006-05-19T23:45:16.166383Z"
+   prop-time="2012-01-17T10:24:37.000000Z"/>
+<entry
+   name="hadoop.css"
+   checksum="e4bb72c0153fbd297134bb540183f4e5"
+   last-author="rangadi"
+   committed-rev="749888"
+   text-time="2009-03-04T03:13:06.000000Z"
+   kind="file"
+   committed-date="2009-03-04T03:13:06.424535Z"/>
+<entry
+   name="jobconf.xsl"
+   checksum="645eeb6e37ed987031a5015f3b00b310"
+   last-author="cutting"
+   committed-rev="474928"
+   text-time="2006-11-14T19:26:15.000000Z"
+   kind="file"
+   committed-date="2006-11-14T19:26:15.536224Z"/>
+<entry
+   name="jobtracker.js"
+   checksum="44439b5b5d765bcbf28f379869114f0a"
+   last-author="ddas"
+   committed-rev="691876"
+   text-time="2008-09-04T05:54:49.000000Z"
+   kind="file"
+   committed-date="2008-09-04T05:54:49.306094Z"/>
+<entry
+   name="sorttable.js"
+   checksum="161487170fdee2e1b36c5f4904317ea8"
+   last-author="omalley"
+   committed-rev="1077535"
+   text-time="2011-03-04T04:25:50.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:25:50.761473Z"/>
+</wc-entries>

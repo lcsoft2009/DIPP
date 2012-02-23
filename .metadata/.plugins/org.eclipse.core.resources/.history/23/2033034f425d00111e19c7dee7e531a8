@@ -1,0 +1,23 @@
+<%@ page
+  contentType="text/html; charset=UTF-8"
+  import="javax.servlet.*"
+  import="javax.servlet.http.*"
+  import="java.io.*"
+  import="java.net.URL"
+  import="org.apache.hadoop.util.*"
+%>
+<html>
+
+<body>
+
+<h4>simple test</h4>
+
+<%--echo hello world--%>
+
+<%@page language="java"%>
+
+<%="Hello World"%>
+
+</body>
+
+</html>

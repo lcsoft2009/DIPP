@@ -1,10 +1,10 @@
 package hipi.imagebundle.mapreduce;
 
-import java.io.IOException;
-
 import hipi.image.FloatImage;
 import hipi.image.ImageHeader;
 import hipi.imagebundle.HipiImageBundle;
+
+import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;

@@ -1,0 +1,20 @@
+package fq;
+
+import java.applet.Applet;
+import java.awt.Graphics;
+import java.awt.Image;
+
+public class Test2 extends Applet {
+
+	Image im1;
+
+	public void init() {
+		im1 = getImage(getCodeBase(), "images/1.jpg");
+	}
+
+	public void paint(Graphics g) {
+		
+		g.drawImage(im1, 0, 0, this);
+	}
+
+}

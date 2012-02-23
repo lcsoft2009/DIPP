@@ -1,15 +1,15 @@
 package hipi.imagebundle.mapreduce;
 
+import hipi.image.FloatImage;
+import hipi.image.ImageHeader;
+import hipi.imagebundle.AbstractImageBundle;
+import hipi.imagebundle.HipiImageBundle;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import hipi.image.FloatImage;
-import hipi.image.ImageHeader;
-import hipi.imagebundle.AbstractImageBundle;
-import hipi.imagebundle.HipiImageBundle;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.BlockLocation;
@@ -18,8 +18,8 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.JobContext;
-import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.RecordReader;
+import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 

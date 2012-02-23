@@ -1,0 +1,32 @@
+package com.liangchu.http;
+import org.eclipse.jetty.server.*;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+
+
+import com.liangchu.servlet.HelloServlet;
+
+
+public  class WebServer { 
+    public static void main(String[] args) throws Exception {     
+                     // Jetty HTTP Servlet Server.     
+                     Server server = new Server(50050);     
+               
+                     
+                     
+                     ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+            
+                     // 设置contextPath如：[url]http://localhost:8000/test...    [/url] 
+                     context.setContextPath("/");     
+                     // 启动的war包的位置     
+                //     context.setWar("webapps");     
+                     server.addHandler(context); 
+                     
+                     context.addServlet(new ServletHolder(new HelloServlet()),"/*");
+                     
+                     server.setStopAtShutdown(true);     
+                     server.setSendServerVersion(true);     
+                     server.start();     
+                     // 将服务添加到连接池中     
+                     server.join();     
+             }     
+     }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.apache.org/repos/asf"
+   name=""
+   revision="1232380"
+   last-author="omalley"
+   url="http://svn.apache.org/repos/asf/hadoop/common/branches/branch-0.20-security-203/src/webapps/datanode"
+   uuid="13f79535-47bb-0310-9956-ffa450edef68"
+   committed-rev="1086650"
+   kind="dir"
+   committed-date="2011-03-29T17:37:11.626099Z"/>
+<entry
+   name="browseBlock.jsp"
+   checksum="6dfbc613c5c7acc8001bd19fbe6dbe30"
+   last-author="omalley"
+   committed-rev="1077659"
+   text-time="2011-03-04T04:41:17.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:41:17.135761Z"/>
+<entry
+   name="browseDirectory.jsp"
+   checksum="b65096df69e61c0dda3f20026518afd1"
+   last-author="omalley"
+   committed-rev="1086650"
+   text-time="2011-03-29T17:37:11.000000Z"
+   kind="file"
+   committed-date="2011-03-29T17:37:11.626099Z"/>
+<entry
+   name="tail.jsp"
+   checksum="fa2744fbdf22032e4cc0e3b67abd2e42"
+   last-author="omalley"
+   committed-rev="1077371"
+   text-time="2011-03-04T04:08:17.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:08:17.724647Z"/>
+</wc-entries>

@@ -64,7 +64,7 @@ public class Downloader extends Configured implements Tool{
 			HipiImageBundle hib = new HipiImageBundle(new Path(temp_path), conf);
 			hib.open(HipiImageBundle.FILE_MODE_WRITE, true);
 
-			String word = value.toString();
+		/*	String word = value.toString();
 
 			BufferedReader reader = new BufferedReader(new StringReader(word));
 			String uri;
@@ -132,21 +132,17 @@ public class Downloader extends Configured implements Tool{
 				System.err.println("> Took " + el + " seconds\n");	
 				
 			
-			}
+			}*/
 
 	//add local image to hib
-		  	File file = new File("/home/hadoop/Desktop/image/1.jpg");
+			for( int it = 1 ; it <= 13; it++ ){
+		  	File file = new File("/home/hadoop/Desktop/image/"+it+".jpg");
 			  FileInputStream fis = new FileInputStream(file);
 			  hib.addImage(fis, ImageType.JPEG_IMAGE);
-			   file = new File("/home/hadoop/Desktop/image/2.jpg");
-			   fis = new FileInputStream(file);
-			  hib.addImage(fis, ImageType.JPEG_IMAGE);
-			   file = new File("/home/hadoop/Desktop/image/3.jpg");
-			   fis = new FileInputStream(file);
-			  hib.addImage(fis, ImageType.JPEG_IMAGE);
+			}
 			try
 			{
-				reader.close();
+			//	reader.close();
 				hib.close();
 				context.write(new BooleanWritable(true), new Text(hib.getPath().toString()));
 			} catch (Exception e)

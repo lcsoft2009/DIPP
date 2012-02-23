@@ -1,0 +1,16 @@
+
+<html>
+
+<body>
+
+<h4>Hadoop simple test</h4>
+
+<%--echo hello world--%>
+
+<%@page language="java"%>
+
+<%="Hello World"%>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+package com.liangchu.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.*;
+@SuppressWarnings("serial")
+public class HelloServlet extends HttpServlet
+{
+    private String greeting="Hello World";
+    public HelloServlet(){}
+    public HelloServlet(String greeting)
+    {
+        this.greeting=greeting;
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+    	
+    	
+    	
+        response.setContentType("text/html");
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().println("<h1>"+greeting+"</h1>");
+        response.getWriter().println("session=" + request.getSession(true).getId());
+        
+
+response.setHeader("Pragma", "No-cache");
+response.setHeader("Cache-Control", "no-cache");
+PrintWriter out = response.getWriter();
+out.println("<head><title>Just a basic servlet</title></head>");
+out.println("<body>");
+out.println("<h1>Just a basic servlet</h1>");
+out.println ("<p>"+" this is a very basic servlet that writes an HTML page.");
+out.println ("<p>For instructions on running those samples on your WebSphere应用服务器 open the page:");
+out.println("<pre>http://<em>your.server.name</em>/IBMWebAs/samples/index.aspl</pre>");
+
+String[] cmd={"/bin/sh","-c","xterm -hold -e hadoop jar Im2Gray.jar   /user/hadoop/jpegDB3.hib   /user/hadoop/jpegDB1024"};
+//String  cmd="hadoop jar Im2Gray.jar   /user/hadoop/jpegDB3.hib   /user/hadoop/jpegDB1022";
+Process proc =Runtime.getRuntime().exec(cmd,null,new File("/usr/local/hadoop/"));
+if (proc.getErrorStream().read() != -1) {
+    proc.destroy();
+}
+BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+
+// BufferedInputStream bis = new
+
+// BufferedInputStream(proc.getInputStream());
+
+String text = null;
+
+while ((text = br.readLine()) != null) {
+
+    System.out.println(text);
+    out.println("<p>"+text+"</p>"); 
+}
+br.close();
+out.println("</body></html>"); 
+out.flush();   
+    }
+}

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.apache.org/repos/asf"
+   name=""
+   revision="1232380"
+   last-author="omalley"
+   url="http://svn.apache.org/repos/asf/hadoop/common/branches/branch-0.20-security-203/src/webapps/job"
+   uuid="13f79535-47bb-0310-9956-ffa450edef68"
+   committed-rev="1077677"
+   kind="dir"
+   committed-date="2011-03-04T04:43:12.519769Z"/>
+<entry
+   name="gethistory.jsp"
+   checksum="d1abb40d88a925c2d53098d1ce2f098b"
+   last-author="omalley"
+   committed-rev="1077591"
+   text-time="2011-03-04T04:32:51.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:32:51.000354Z"/>
+<entry
+   name="index.html"
+   checksum="4053224c954e506679e22b3b97986050"
+   last-author="cutting"
+   committed-rev="407930"
+   text-time="2006-05-19T23:45:16.000000Z"
+   kind="file"
+   committed-date="2006-05-19T23:45:16.166383Z"/>
+<entry
+   name="job_authorization_error.jsp"
+   checksum="699c134265719bf9a4016d8e117d67c0"
+   last-author="omalley"
+   committed-rev="1077247"
+   text-time="2011-03-04T03:55:52.000000Z"
+   kind="file"
+   committed-date="2011-03-04T03:55:52.710835Z"/>
+<entry
+   name="jobblacklistedtrackers.jsp"
+   checksum="9e7480167e7f4846f51235af2cbe8e57"
+   last-author="omalley"
+   committed-rev="1077338"
+   text-time="2011-03-04T04:04:58.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+<entry
+   name="jobconf.jsp"
+   checksum="c3a178864d03fbe3d6fc0011dabdd753"
+   last-author="omalley"
+   committed-rev="1077338"
+   text-time="2011-03-04T04:04:58.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+<entry
+   name="jobdetails.jsp"
+   checksum="0f9e941a947a3bfa88289f6719b36922"
+   last-author="omalley"
+   committed-rev="1077677"
+   text-time="2011-03-04T04:43:12.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:43:12.519769Z"/>
+<entry
+   name="jobfailures.jsp"
+   checksum="2db8fc97fa788a9d16001981a6375410"
+   last-author="omalley"
+   committed-rev="1077338"
+   text-time="2011-03-04T04:04:58.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+<entry
+   name="jobhistory.jsp"
+   checksum="9b9f598c12765c46ac922948dfdb7950"
+   last-author="omalley"
+   committed-rev="1077590"
+   text-time="2011-03-04T04:32:45.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:32:45.005876Z"/>
+<entry
+   name="jobqueue_details.jsp"
+   checksum="9a1ddf0cf701e0284512c7e081ff3f1f"
+   last-author="omalley"
+   committed-rev="1077534"
+   text-time="2011-03-04T04:25:43.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:25:43.801939Z"/>
+<entry
+   name="jobtasks.jsp"
+   checksum="059aa31f0d9709b5de973366776ffaa6"
+   last-author="omalley"
+   committed-rev="1077338"
+   text-time="2011-03-04T04:04:58.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+<entry
+   name="jobtracker.jsp"
+   checksum="fd6e7cf8d27ddddea444b073498359dd"
+   last-author="omalley"
+   committed-rev="1077596"
+   text-time="2011-03-04T04:33:31.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:33:31.085473Z"/>
+<entry
+   name="machines.jsp"
+   checksum="97aed177fdc332426e398b09ee51ff2d"
+   last-author="omalley"
+   committed-rev="1077596"
+   text-time="2011-03-04T04:33:31.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:33:31.085473Z"/>
+<entry
+   name="taskdetails.jsp"
+   checksum="7aba229195550ad8b2b5e886233c0e46"
+   last-author="omalley"
+   committed-rev="1077338"
+   text-time="2011-03-04T04:04:58.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+<entry
+   name="taskstats.jsp"
+   checksum="ce5167c67aa3e461effa090e820da099"
+   last-author="omalley"
+   committed-rev="1077338"
+   text-time="2011-03-04T04:04:58.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+</wc-entries>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 elements(s) to &apos;Im2Gray&apos;&#x0A;- Original project: &apos;branch-0.20-security-203&apos;&#x0A;- Destination element: &apos;Im2Gray&apos;&#x0A;- Original element: &apos;webapps&apos;" description="Copy folder" element1="src/webapps" files="0" flags="589830" folders="1" id="org.eclipse.jdt.ui.copy" log="src/webapps&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1329902632131" target="/Im2Gray" units="0" version="1.0"/>
+</session>

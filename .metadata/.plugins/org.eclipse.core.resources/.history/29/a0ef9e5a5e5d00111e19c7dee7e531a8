@@ -1,0 +1,23 @@
+package com.liangchu.http;
+
+
+
+
+import com.liangchu.servlet.HelloServlet;
+
+
+public  class WebServer { 
+    public static void main(String[] args) throws Exception {     
+                     // Jetty HTTP Servlet Server.     
+                     Server server = new Server(50050);     
+
+                     ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+                     context.setContextPath("/");
+                     server.setHandler(context);
+
+                     context.addServlet(new ServletHolder(new HelloServlet()),"/*");
+                   
+                     server.start();
+                     server.join();
+                 }    
+     }

@@ -1,10 +1,10 @@
 package hipi.image.io;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import hipi.image.FloatImage;
 import hipi.image.ImageHeader;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * This class provides the necessary functions for reading an image from an

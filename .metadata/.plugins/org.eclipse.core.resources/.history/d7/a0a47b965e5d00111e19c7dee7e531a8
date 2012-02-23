@@ -1,0 +1,72 @@
+import org.mortbay.jetty.Connector; 
+import org.mortbay.jetty.Server; 
+import org.mortbay.jetty.nio.SelectChannelConnector; 
+import org.mortbay.jetty.webapp.WebAppContext; 
+
+/** 
+* A test. 
+*/ 
+public class WebServer { 
+
+private static WebServer WebServer; 
+
+private WebServer(){ 
+
+} 
+
+public static WebServer getAPI(){ 
+if(WebServer==null){ 
+	WebServer = new WebServer(); 
+} 
+return WebServer; 
+} 
+
+public void method01(String name){ 
+System.out.println("Name is "+name); 
+} 
+
+public void method02(int age){ 
+System.out.println("Age is "+age); 
+} 
+
+public void jettyStarts(){ 
+//Create a server . 
+Server server = new Server(); 
+
+//Set the HTTP host and post address. 
+Connector connector = new SelectChannelConnector(); 
+connector.setPort(8000); 
+connector.setHost("localhost"); 
+
+server.setConnectors(new Connector[]{connector}); 
+
+//Web context. 
+WebAppContext context = new WebAppContext(); 
+
+//The web context path. 
+context.setContextPath("/WebTest"); 
+
+System.out.println(System.getProperty("user.dir")+"\\WebRoot"); 
+//All static files ,like .jsp or .html etc. 
+context.setResourceBase(System.getProperty("user.dir")+"\\WebRoot"); 
+
+//The SERVLET class and path. 
+context.addServlet(com.liangchu.servlet.HelloServlet.class, "/myServlet"); 
+
+//A ServletContextListener instance. 
+//context.addEventListener(new WebInitListener()); 
+
+server.addHandler(context);     
+        server.setStopAtShutdown(true);     
+        server.setSendServerVersion(true);     
+        try { 
+        //Start Jetty server. 
+server.start();     
+server.join(); 
+} catch (InterruptedException e) { 
+e.printStackTrace(); 
+} catch (Exception e) { 
+e.printStackTrace(); 
+}     
+} 
+} 

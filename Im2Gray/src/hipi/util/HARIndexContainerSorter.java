@@ -1,7 +1,7 @@
 package hipi.util;
-import java.util.Comparator;
-
 import hipi.container.HARIndexContainer;
+
+import java.util.Comparator;
 
 public class HARIndexContainerSorter implements Comparator<HARIndexContainer>{
 

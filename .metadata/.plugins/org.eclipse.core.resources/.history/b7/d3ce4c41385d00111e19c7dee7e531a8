@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.apache.org/repos/asf"
+   name=""
+   revision="1232380"
+   last-author="omalley"
+   url="http://svn.apache.org/repos/asf/hadoop/common/branches/branch-0.20-security-203/src/webapps/task"
+   uuid="13f79535-47bb-0310-9956-ffa450edef68"
+   committed-rev="1077338"
+   kind="dir"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+<entry
+   name="index.html"
+   checksum="12d5f525a69adbaa97f0fbb08e66b69b"
+   last-author="cutting"
+   committed-rev="407930"
+   text-time="2006-05-19T23:45:16.000000Z"
+   kind="file"
+   committed-date="2006-05-19T23:45:16.166383Z"/>
+<entry
+   name="tasktracker.jsp"
+   checksum="9875f9b7dde7a5aec79748af9a251e5b"
+   last-author="omalley"
+   committed-rev="1077338"
+   text-time="2011-03-04T04:04:58.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:04:58.607625Z"/>
+</wc-entries>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.apache.org/repos/asf"
+   name=""
+   revision="1232380"
+   last-author="omalley"
+   url="http://svn.apache.org/repos/asf/hadoop/common/branches/branch-0.20-security-203/src/webapps/hdfs"
+   uuid="13f79535-47bb-0310-9956-ffa450edef68"
+   committed-rev="1077659"
+   kind="dir"
+   committed-date="2011-03-04T04:41:17.135761Z"/>
+<entry
+   name="dfshealth.jsp"
+   checksum="f0a7f689523c233e484d9e1c7813ed4d"
+   last-author="omalley"
+   committed-rev="1077058"
+   text-time="2011-03-04T03:36:27.000000Z"
+   kind="file"
+   committed-date="2011-03-04T03:36:27.810537Z"/>
+<entry
+   name="dfsnodelist.jsp"
+   checksum="a6c6a342e21b76b80e1a3ae0f9d9c9da"
+   last-author="omalley"
+   committed-rev="1077473"
+   text-time="2011-03-04T04:18:39.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:18:39.444655Z"/>
+<entry
+   name="index.html"
+   checksum="5eab4349f71e9eb274f138270839502a"
+   last-author="cutting"
+   committed-rev="427715"
+   text-time="2006-08-01T20:34:43.000000Z"
+   kind="file"
+   committed-date="2006-08-01T20:34:43.137787Z"/>
+<entry
+   name="nn_browsedfscontent.jsp"
+   checksum="ef0cb7f9cc4ed12c5e23c6cbe2ac220d"
+   last-author="omalley"
+   committed-rev="1077659"
+   text-time="2011-03-04T04:41:17.000000Z"
+   kind="file"
+   committed-date="2011-03-04T04:41:17.135761Z"/>
+</wc-entries>

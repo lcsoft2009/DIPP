@@ -1,11 +1,11 @@
 package hipi.imagebundle;
 
+import hipi.container.HARIndexContainer;
 import hipi.image.FloatImage;
 import hipi.image.ImageHeader;
 import hipi.image.ImageHeader.ImageType;
 import hipi.image.io.CodecManager;
 import hipi.image.io.ImageDecoder;
-import hipi.container.HARIndexContainer;
 import hipi.util.HARIndexContainerSorter;
 
 import java.io.ByteArrayInputStream;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;

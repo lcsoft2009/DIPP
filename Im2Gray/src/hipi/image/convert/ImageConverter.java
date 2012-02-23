@@ -1,13 +1,13 @@
 package hipi.image.convert;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import hipi.image.FloatImage;
 import hipi.image.ImageHeader;
 import hipi.image.io.ImageDecoder;
 import hipi.image.io.ImageEncoder;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class ImageConverter {
 

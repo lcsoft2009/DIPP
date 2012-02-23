@@ -5,6 +5,7 @@ import hipi.util.ByteUtils;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+
 import org.apache.hadoop.io.BinaryComparable;
 import org.apache.hadoop.io.RawComparator;
 import org.apache.hadoop.io.Writable;
