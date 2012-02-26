@@ -162,7 +162,7 @@ public class FqImage {
 			}
 			
 			
-//			System.out.println(k+":");
+			System.out.println(k+":");
 			
 			this.colorJuH[k] = sumh / ( this.width * this.height );				
 			if( k == 2 )

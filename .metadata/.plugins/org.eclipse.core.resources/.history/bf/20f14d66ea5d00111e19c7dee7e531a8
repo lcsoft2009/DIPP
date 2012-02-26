@@ -1,0 +1,139 @@
+package com.liangchu;
+
+
+import hipi.image.FloatImage;
+import hipi.image.ImageHeader;
+import hipi.image.io.ImageEncoder;
+import hipi.image.io.JPEGImageUtil;
+import hipi.imagebundle.mapreduce.ImageBundleInputFormat;
+import hipi.imagebundle.mapreduce.output.BinaryOutputFormat;
+import hipi.util.ByteUtils;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.BooleanWritable;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.Mapper.Context;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
+
+import com.liangchu.image.*;
+public class ImageDB extends Configured implements Tool{
+
+	public static class MyMapper extends Mapper<ImageHeader, FloatImage, IntWritable, Text>
+	{
+		
+		private Path path;
+		private FileSystem fileSystem;
+		private Configuration conf;
+		public void setup(Context jc) throws IOException
+		{
+			conf = jc.getConfiguration();
+			fileSystem = FileSystem.get(conf);
+			path = new Path( conf.get("imageDB.outdir"));
+			fileSystem.mkdirs(path);
+		}
+		public void map(ImageHeader key, FloatImage value, Context context) throws IOException, InterruptedException{
+			if (value != null) {
+	
+				FqImage imh	=	new FqImage(value);
+				imh.setColorJu();
+				String hexHash = ByteUtils.asHex(ByteUtils.FloatArraytoByteArray(gray.getData()));
+								
+				context.write(new IntWritable(0), new Text(hexHash));
+			}
+		}
+	}
+	public static class MyReducer extends Reducer<IntWritable, Text, IntWritable, Text> {
+		// Just the basic indentity reducer... no extra functionality needed at this time
+		private FileSystem fileSystem;
+		private Path path;
+		private ImageHeader head;
+		private Configuration conf;
+		
+		public void setup(Context jc) throws IOException
+		{
+			conf = jc.getConfiguration();
+			fileSystem = FileSystem.get(conf);
+			path = new Path( conf.get("imageDB.outdir"));
+			fileSystem.mkdirs(path);
+		}
+		
+		public void reduce(IntWritable key, Iterable<Text> values, Context context)
+		throws IOException, InterruptedException
+		{
+			for (Text value : values) {
+				context.write(key, value);
+			}
+		}
+		
+	}
+		public int run(String[] args) throws Exception
+		{	
+
+			// Read in the configurations
+			if (args.length < 2)
+			{
+				System.out.println("Usage: im2gray <inputdir> <outputdir> <input type: hib, har, sequence, small_files>");
+				System.exit(0);
+			}
+
+
+			// Setup configuration
+			Configuration conf = new Configuration();
+
+			// set the dir to output the jpegs to
+			String inputPath = args[0];
+			String outputPath = args[1];
+			
+			conf.setStrings("imageDB.outdir", outputPath);
+
+			Job job = new Job(conf, "imageDB");
+			job.setJarByClass(ImageDB.class);
+			job.setMapperClass(MyMapper.class);
+			job.setReducerClass(MyReducer.class);
+
+			// Set formats     
+			job.setOutputKeyClass(IntWritable.class);
+			job.setOutputValueClass(Text.class);
+			job.setInputFormatClass(ImageBundleInputFormat.class);
+			// Set out/in paths
+
+			FileOutputFormat.setOutputPath(job, new Path(outputPath));
+			FileInputFormat.setInputPaths(job, new Path(inputPath));
+
+			job.setNumReduceTasks(1);
+			System.exit(job.waitForCompletion(true) ? 0 : 1);
+			return 0;
+		}
+		public static void removeDir(String path, Configuration conf) throws IOException {
+			Path output_path = new Path(path);
+
+			FileSystem fs = FileSystem.get(conf);
+
+			if (fs.exists(output_path)) {
+				fs.delete(output_path, true);
+			}
+		}
+		public static void main(String[] args) throws Exception {
+			int res = ToolRunner.run(new ImageDB(), args);
+			System.exit(res);
+		}
+	}

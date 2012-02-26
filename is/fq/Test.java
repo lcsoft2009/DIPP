@@ -41,13 +41,9 @@ public class Test{
 			for( int i = 1 ; i <= 13; i++ ){
 				BufferedImage	im	=	ImageIO.read( new File("/home/hadoop/Desktop/image/"+i+".jpg") );
 				FqImage imh	=	new FqImage(im);
+				//imh.setColorJu();
 				double minD=100000000;
 				int index=i;
-
-					for(int k=1;k<=3;k++)
-					{
-						System.out.println(imh.colorJuV[k]);
-					}
 				
 				for(int j=1;j<=13;j++)
 				{
@@ -72,9 +68,9 @@ public class Test{
 				
 				}
 				for( int j = 1 ; j <= 3 ; j++ ){
-		//			System.out.print(imh.colorJuH[j]+" ");
-		//			System.out.print(imh.colorJuS[j]+" ");
-		//			System.out.print(imh.colorJuV[j]+" ");
+					System.out.print(imh.colorJuH[j]+" ");
+					System.out.print(imh.colorJuS[j]+" ");
+					System.out.print(imh.colorJuV[j]+" ");
 				}
 				System.out.println();
 			}
