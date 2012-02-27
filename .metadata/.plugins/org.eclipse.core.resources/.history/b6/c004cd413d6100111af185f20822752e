@@ -1,0 +1,165 @@
+package com.liangchu.http.servlet;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.hadoop.hbase.KeyValue;
+import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
+
+import com.liangchu.image.FqImage;
+@SuppressWarnings("serial")
+public class HelloServlet extends HttpServlet
+{
+    private String greeting="Image search";
+    private String uploadPath = "/home/hadoop/Desktop/imageSearch"; // 用于存放上传文件的目录
+    private String tempPath = "/home/hadoop/Desktop/imageSearch/tmp"; // 用于存放临时文件的目录
+    public HelloServlet(){}
+    public HelloServlet(String greeting)
+    {
+        this.greeting=greeting;
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {	
+    	 response.setContentType("text/html");
+         response.setStatus(HttpServletResponse.SC_OK);
+         response.getWriter().println("<h1>"+greeting+"</h1>");
+         response.getWriter().println("session=" + request.getSession(true).getId());
+         
+
+ response.setHeader("Pragma", "No-cache");
+ response.setHeader("Cache-Control", "no-cache");
+ PrintWriter out = response.getWriter();
+ out.println("<head><title>Image Search In Hadoop</title></head>");
+ out.println("<body>");
+
+
+ out.println("<pre>http://<em>your.server.name</em>/IBMWebAs/samples/index.aspl</pre>");
+
+ long   time1   =   System.currentTimeMillis();
+ String fileName="";
+ 
+ try {
+     DiskFileUpload fu = new DiskFileUpload();
+     // 设置最大文件尺寸，这里是4MB
+     fu.setSizeMax(4194304);
+     // 设置缓冲区大小，这里是4kb
+     fu.setSizeThreshold(4096);
+     // 设置临时目录：
+     fu.setRepositoryPath(tempPath);
+
+     // 得到所有的文件：
+     List fileItems = fu.parseRequest(request);
+     Iterator i = fileItems.iterator();
+     // 依次处理每一个文件：
+     while(i.hasNext()) {
+         FileItem fi = (FileItem)i.next();
+         // 获得文件名，这个文件名包括路径：
+         fileName = fi.getName();
+         if(fileName!=null) {
+             // 在这里可以记录用户和文件信息
+             // ...
+             // 写入文件a.txt，你也可以从fileName中提取文件名：
+             fi.write(new File(fileName));
+         }
+     }
+     // 跳转到上传成功提示页面
+ }
+ catch(Exception e) {
+     // 可以跳转出错页面
+ }
+ 
+ 
+ System.out.println(fileName);
+ BufferedImage	im	=	ImageIO.read( new File(fileName) );
+ 
+ 
+ FqImage imh	=	new FqImage(im);
+ 
+ imh.setColorJu();
+
+
+
+ HTable table = new HTable("colorJu");
+ Scan s = new Scan();
+ ResultScanner ss = table.getScanner(s);
+
+ double[] hsv = new double[10];
+ int[] id=new int[100];
+ double[] imageDis=new double[100];
+ int counter=0;
+ double[] colorJuH = new double[4];
+ double[] colorJuS = new double[4];
+ double[] colorJuV = new double[4];
+ for(Result r:ss){
+ 	 KeyValue[] kv=r.raw();
+ 	 id[counter]= Integer.parseInt(new String(kv[0].getRow()));
+ 	 for(int i=0;i<kv.length;i++){
+            hsv[i]=Double.parseDouble(new String(kv[i].getValue()));
+        }
+
+     for(int i=0;i<hsv.length;i++)
+      {
+      	if(i>=1 && i<=3)
+      	{
+      	colorJuH[i]=hsv[i];
+      	}
+      	if(i>3 && i<=6)
+      	{
+      		colorJuS[i-3]=hsv[i];
+      	}
+      	if(i>6 && i<=9)
+      	{
+      		colorJuV[i-6]=hsv[i];
+      	}
+      }
+     
+     imageDis[counter]=dColorJu(imh,colorJuH,colorJuS,colorJuV);
+     out.println("<p>id="+id[counter]+",		Distance="+imageDis[counter]+"</p>"); 
+     counter++;
+ }
+
+ long   time2   =     System.currentTimeMillis(); 
+ double   diff   =   (time2   -   time1)/1000.0; 
+ out.println("<p>Search Time: "+diff+ "seconds </p>");
+ System.out.println( "Search Time: "+diff+ "seconds ");
+    }
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+    	
+		super.doGet(request, response);
+	}
+    
+    public double dColorJu( FqImage imh, double[] colorJuH,double[] colorJuS,double[] colorJuV){
+		double	temph	=	0.0;
+		double 	temps 	= 	0.0;
+		double 	tempv 	= 	0.0;
+		int		i;
+		double	wh		=	8.0;
+		double	ws		=	3.01;
+		double	wv		=	3.01;
+		for( i = 1 ; i <= 3 ; i++ ){
+			temph += (	( colorJuH[i] - imh.colorJuH[i] ) * ( colorJuH[i] - imh.colorJuH[i] )	);
+			temps += (	( colorJuS[i] - imh.colorJuS[i] ) * ( colorJuS[i] - imh.colorJuS[i] )	);
+			tempv += (	( colorJuV[i] - imh.colorJuV[i] ) * ( colorJuV[i] - imh.colorJuV[i] ) );
+		}
+		return	Math.sqrt( temph * wh + temps * ws + tempv * wv );
+	}
+}
+    
+    
