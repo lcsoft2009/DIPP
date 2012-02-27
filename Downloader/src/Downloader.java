@@ -1,11 +1,8 @@
 
-
 import hipi.image.ImageHeader.ImageType;
 import hipi.imagebundle.HipiImageBundle;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
@@ -57,14 +54,13 @@ public class Downloader extends Configured implements Tool{
 		public void map(IntWritable key, Text value, Context context) 
 		throws IOException, InterruptedException
 		{
-			System.err.println("> Took yyyyyyyyyyyyyyyyyyy");				
 			String temp_path = conf.get("downloader.outpath") + key.get() + ".hib.tmp";
-			System.err.println("Temp path: " + temp_path);
+			System.out.println("Temp path: " + temp_path);
 			
 			HipiImageBundle hib = new HipiImageBundle(new Path(temp_path), conf);
 			hib.open(HipiImageBundle.FILE_MODE_WRITE, true);
 
-		/*	String word = value.toString();
+			String word = value.toString();
 
 			BufferedReader reader = new BufferedReader(new StringReader(word));
 			String uri;
@@ -92,13 +88,13 @@ public class Downloader extends Configured implements Tool{
 
 					try {
 						URL link = new URL(uri);
-						System.out.println("Downloading " + link.toString());
+						System.err.println("Downloading " + link.toString());
 						conn = link.openConnection();
 						conn.connect();
 						type = conn.getContentType();
 					} catch (Exception e)
 					{
-						System.out.println("Connection error to image : " + uri);
+						System.err.println("Connection error to image : " + uri);
 						continue;
 					}
 
@@ -129,20 +125,13 @@ public class Downloader extends Configured implements Tool{
 				// Emit success
 				stopT = System.currentTimeMillis();
 				float el = (float)(stopT-startT)/1000.0f;
-				System.err.println("> Took " + el + " seconds\n");	
-				
-			
-			}*/
-
-	//add local image to hib
-			for( int it = 1 ; it <= 13; it++ ){
-		  	File file = new File("/home/hadoop/Desktop/image/"+it+".jpg");
-			  FileInputStream fis = new FileInputStream(file);
-			  hib.addImage(fis, ImageType.JPEG_IMAGE);
+				System.err.println("> Took " + el + " seconds\n");				
 			}
+
+
 			try
 			{
-			//	reader.close();
+				reader.close();
 				hib.close();
 				context.write(new BooleanWritable(true), new Text(hib.getPath().toString()));
 			} catch (Exception e)

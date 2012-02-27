@@ -23,7 +23,6 @@
 	<classpathentry kind="lib" path="/usr/local/hadoop/lib/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/lib/slf4j-api-1.4.3.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/lib/jasper-compiler-5.5.12.jar"/>
-	<classpathentry kind="lib" path="/home/hadoop/workspace/jpegfromhib/lib/metadata-extractor-2.3.1.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/hadoop-0.20.2-ant.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/hadoop-0.20.2-core.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/hadoop-0.20.2-examples.jar"/>
@@ -33,5 +32,6 @@
 	<classpathentry kind="lib" path="lib/jetty-continuation-7.6.1.v20120215.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-6.1.14.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-util-6.1.14.jar"/>
+	<classpathentry kind="lib" path="lib/metadata-extractor-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

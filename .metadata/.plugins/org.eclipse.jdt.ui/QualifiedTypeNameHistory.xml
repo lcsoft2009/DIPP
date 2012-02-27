@@ -10,4 +10,5 @@
 <fullyQualifiedTypeName name="hipi.experiments.mapreduce.JPEGFileInputFormat.JPEGFileInputFormat"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="com.liangchu.ImageSearch"/>
 </qualifiedTypeNameHistroy>

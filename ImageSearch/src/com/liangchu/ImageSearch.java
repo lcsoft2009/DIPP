@@ -1,40 +1,31 @@
 package com.liangchu;
 
-
 import hipi.image.FloatImage;
 import hipi.image.ImageHeader;
-import hipi.image.io.ImageEncoder;
-import hipi.image.io.JPEGImageUtil;
 import hipi.imagebundle.mapreduce.ImageBundleInputFormat;
-import hipi.imagebundle.mapreduce.output.BinaryOutputFormat;
-import hipi.util.ByteUtils;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
-import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.BooleanWritable;
+import org.apache.hadoop.hbase.KeyValue;
+import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-
-import com.liangchu.image.*;
+import com.liangchu.image.FqImage;
 public class ImageSearch extends Configured implements Tool{
 
 	public static class MyMapper extends Mapper<ImageHeader, FloatImage, IntWritable, Text>
@@ -47,7 +38,7 @@ public class ImageSearch extends Configured implements Tool{
 		{
 			conf = jc.getConfiguration();
 			fileSystem = FileSystem.get(conf);
-			path = new Path( conf.get("imageDB.outdir"));
+			path = new Path( conf.get("imageSearch.outdir"));
 			fileSystem.mkdirs(path);
 		}
 		public void map(ImageHeader key, FloatImage value, Context context) throws IOException, InterruptedException{
@@ -66,19 +57,71 @@ public class ImageSearch extends Configured implements Tool{
 				bufferedImage.setRGB(0, 0, value.getWidth(), value.getHeight(), rgb, 0, value.getWidth());
 				FqImage imh	=	new FqImage(bufferedImage);
 				imh.setColorJu();
-				String colorJuH1 = Double.toString(imh.colorJuH[1]);
-				String colorJuH2 = Double.toString(imh.colorJuH[2]);
-				String colorJuH3 = Double.toString(imh.colorJuH[3]);
-				String colorJuS1 = Double.toString(imh.colorJuS[1]);
-				String colorJuS2 = Double.toString(imh.colorJuS[2]);
-				String colorJuS3 = Double.toString(imh.colorJuS[3]);
-				String colorJuV1 = Double.toString(imh.colorJuV[1]);
-				String colorJuV2 = Double.toString(imh.colorJuV[2]);
-				String colorJuV3 = Double.toString(imh.colorJuV[3]);
+
 				
-				context.write(new IntWritable(1), new Text(colorJuH1+" "+colorJuH2+" "+colorJuH3+" "+colorJuS1+" "+colorJuS2+" "+colorJuS3+" "+colorJuV1+" "+colorJuV2+" "+colorJuV3));
+				
+				 HTable table = new HTable(conf, "colorJu");
+	             Scan s = new Scan();
+	             ResultScanner ss = table.getScanner(s);
+	    
+	             double[] hsv = new double[10];
+	             int[] id=new int[100];
+	             double[] imageDis=new double[100];
+	             int counter=0;
+	             for(Result r:ss){
+	            	 
+	            	 KeyValue[] kv=r.raw();
+	            	 for(int i=0;i<kv.length;i++){
+				            id[i]= Integer.parseInt(new String(kv[i].getRow()));
+				            hsv[i]=Double.parseDouble(new String(kv[i].getValue()));
+				        }
+
+
+			        double[] colorJuH = new double[4];
+			        double[] colorJuS = new double[4];
+			        double[] colorJuV = new double[4];
+			      
+			       for(int i=0;i<hsv.length;i++)
+			        {
+			        	if(i>=1 && i<=3)
+			        	{
+			        	colorJuH[i]=hsv[i];
+			        	}
+			        	if(i>3 && i<=6)
+			        	{
+			        		colorJuS[i-3]=hsv[i];
+			        	}
+			        	if(i>6 && i<=9)
+			        	{
+			        		colorJuV[i-6]=hsv[i];
+			        	}
+			        }
+			       counter++;
+			       
+			       imageDis[counter]=dColorJu(imh,colorJuH,colorJuS,colorJuV);
+			        
 			}
+	             for(int i=0;i<counter;i++)
+	             {           	 
+	            	 context.write(new IntWritable(id[counter]), new Text(String.valueOf(imageDis[i])));
+	             }
 		}
+	}
+		 public double dColorJu( FqImage imh, double[] colorJuH,double[] colorJuS,double[] colorJuV){
+				double	temph	=	0.0;
+				double 	temps 	= 	0.0;
+				double 	tempv 	= 	0.0;
+				int		i;
+				double	wh		=	8.0;
+				double	ws		=	3.01;
+				double	wv		=	3.01;
+				for( i = 1 ; i <= 3 ; i++ ){
+					temph += (	( colorJuH[i] - imh.colorJuH[i] ) * ( colorJuH[i] - imh.colorJuH[i] )	);
+					temps += (	( colorJuS[i] - imh.colorJuS[i] ) * ( colorJuS[i] - imh.colorJuS[i] )	);
+					tempv += (	( colorJuV[i] - imh.colorJuV[i] ) * ( colorJuV[i] - imh.colorJuV[i] ) );
+				}
+				return	Math.sqrt( temph * wh + temps * ws + tempv * wv );
+			}
 	}
 	public static class MyReducer extends Reducer<IntWritable, Text, IntWritable, Text> {
 		// Just the basic indentity reducer... no extra functionality needed at this time
@@ -91,7 +134,7 @@ public class ImageSearch extends Configured implements Tool{
 		{
 			conf = jc.getConfiguration();
 			fileSystem = FileSystem.get(conf);
-			path = new Path( conf.get("imageDB.outdir"));
+			path = new Path( conf.get("imageSearch.outdir"));
 			fileSystem.mkdirs(path);
 		}
 		
@@ -108,9 +151,9 @@ public class ImageSearch extends Configured implements Tool{
 		{	
 
 			// Read in the configurations
-			if (args.length < 2)
+			if (args.length < 1)
 			{
-				System.out.println("Usage: im2gray <inputdir> <outputdir> <input type: hib, har, sequence, small_files>");
+				System.out.println("Usage: imageSearch  <outputdir> ");
 				System.exit(0);
 			}
 
@@ -122,9 +165,9 @@ public class ImageSearch extends Configured implements Tool{
 			String inputPath = args[0];
 			String outputPath = args[1];
 			
-			conf.setStrings("imageDB.outdir", outputPath);
+			conf.setStrings("imageSearch.outdir", outputPath);
 
-			Job job = new Job(conf, "imageDB");
+			Job job = new Job(conf, "imageSearch");
 			job.setJarByClass(ImageSearch.class);
 			job.setMapperClass(MyMapper.class);
 			job.setReducerClass(MyReducer.class);
@@ -156,3 +199,4 @@ public class ImageSearch extends Configured implements Tool{
 			System.exit(res);
 		}
 	}
+

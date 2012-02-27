@@ -38,16 +38,16 @@
 		<item value="false" key="jarOptionsWizardPage.STORE_USE_SRC_FOLDERS"/>
 		<item value="" key="jarOptionsWizardPage.DESCRIPTION_LOCATION"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/usr/local/hadoop/Downloador.jar"/>
+			<item value="/usr/local/hadoop/addImagetoHib.jar"/>
+			<item value="/usr/local/hadoop/ImageSearch.jar"/>
 			<item value="/usr/local/hadoop/downloador.jar"/>
 			<item value="/usr/local/hadoop/IDownloador.jar"/>
-			<item value="/usr/local/hadoop/Im2Gray.jar"/>
-			<item value="/usr/local/hadoop/covariance.jar"/>
-			<item value="/usr/local/hadoop/dumphib.jar"/>
 		</list>
 	</section>
 	<section name="RefactoringWizard.preview">
-		<item value="400" key="height"/>
-		<item value="600" key="width"/>
+		<item value="410" key="height"/>
+		<item value="640" key="width"/>
 	</section>
 	<section name="SourceActionDialog.methods">
 		<item value="1" key="VisibilityModifier"/>
