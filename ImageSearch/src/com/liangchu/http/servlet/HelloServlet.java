@@ -35,10 +35,10 @@ public class HelloServlet extends HttpServlet
 response.setHeader("Pragma", "No-cache");
 response.setHeader("Cache-Control", "no-cache");
 PrintWriter out = response.getWriter();
-out.println("<head><title>Just a basic servlet</title></head>");
+out.println("<head><title>Just a basic Test</title></head>");
 out.println("<body>");
-out.println("<h1>Just a basic servlet</h1>");
-out.println ("<p>For instructions on running those samples on your WebSphere应用服务器 open the page:");
+
+
 out.println("<pre>http://<em>your.server.name</em>/IBMWebAs/samples/index.aspl</pre>");
 
 
@@ -48,19 +48,41 @@ out.println("<pre>http://<em>your.server.name</em>/IBMWebAs/samples/index.aspl</
 
 //String[] cmd={"/bin/sh","-c","xterm -hold -e hadoop fs -cat /user/hadoop/jpegDB2012/*"};
 //String cmd="hadoop fs -cat /user/hadoop/jpegDB2013/*";
-String[] cmd={"/bin/sh","-c","xterm -hold -e hadoop jar ImageSearch.jar   /user/hadoop/jpegDB01.hib   /user/hadoop/resultDistance21"};
-Process proc =Runtime.getRuntime().exec(cmd,null,new File("/usr/local/hadoop/"));
+String addstr="resultDistance33";
+//String[] cmd={"/bin/sh","-c","xterm -hold -e hadoop jar ImageSearch.jar   /user/hadoop/jpegDB01.hib   /user/hadoop/"+addstr};
+String cmd="hadoop jar ImageSearch.jar   /user/hadoop/jpegDB01.hib   /user/hadoop/"+addstr;
+String cmd2="hadoop fs -cat /user/hadoop/"+addstr+"/*";
+long   time1   =   System.currentTimeMillis();
+try {
+	Runtime.getRuntime().exec(cmd,null,new File("/usr/local/hadoop/")).waitFor();
+} catch (InterruptedException e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+}
 
-BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+Process proc2 =Runtime.getRuntime().exec(cmd2,null,new File("/usr/local/hadoop/"));
+try {
+	proc2.waitFor();
+} catch (InterruptedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+BufferedReader br = new BufferedReader(new InputStreamReader(proc2.getInputStream()));
 
 // BufferedInputStream bis = new
 
 // BufferedInputStream(proc.getInputStream());
+ 
+//   your   calculation 
+long   time2   =     System.currentTimeMillis(); 
 
+double   diff   =   (time2   -   time1)/1000.0; 
+System.out.println( "Your   program   runs: "+diff+ "   mill   seconds ");
 String text = null;
-
+out.println("<p>Time:"+diff+"s</p>"); 
 while ((text = br.readLine()) != null) {
-
+	
+	out.println("<p>"+text+"</p>"); 
     System.out.println(text);
 }
 //br.close();

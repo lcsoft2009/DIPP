@@ -69,10 +69,11 @@ public class ImageSearch extends Configured implements Tool{
 	             double[] imageDis=new double[100];
 	             int counter=0;
 	             for(Result r:ss){
-	            	 
+	            	   System.out.println("counter="+counter);
 	            	 KeyValue[] kv=r.raw();
+	            	    System.out.println("id["+counter+"]="+id[0]);
+	            	 id[counter]= Integer.parseInt(new String(kv[0].getRow()));
 	            	 for(int i=0;i<kv.length;i++){
-				            id[i]= Integer.parseInt(new String(kv[i].getRow()));
 				            hsv[i]=Double.parseDouble(new String(kv[i].getValue()));
 				        }
 
@@ -103,7 +104,8 @@ public class ImageSearch extends Configured implements Tool{
 			}
 	             for(int i=0;i<counter;i++)
 	             {           	 
-	            	 context.write(new IntWritable(id[counter]), new Text(String.valueOf(imageDis[i])));
+	            	 System.out.println("id="+id[i]);
+	            	 context.write(new IntWritable(id[i]), new Text(String.valueOf(imageDis[i])));
 	             }
 		}
 	}
