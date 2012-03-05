@@ -106,6 +106,7 @@ public class HBaseDB {
         Get get = new Get(rowKey.getBytes());
         Result rs = table.get(get);
         for(KeyValue kv : rs.raw()){
+        	
             System.out.print(new String(kv.getRow()) + " " );
             System.out.print(new String(kv.getFamily()) + ":" );
             System.out.print(new String(kv.getQualifier()) + " " );
@@ -122,12 +123,14 @@ public class HBaseDB {
              HTable table = new HTable(conf, tableName);
              Scan s = new Scan();
              ResultScanner ss = table.getScanner(s);
+           int  count=0;
              for(Result r:ss){
+            	 count++;
                  for(KeyValue kv : r.raw()){
                     System.out.print(new String(kv.getRow()) + " ");
                     System.out.print(new String(kv.getFamily()) + ":");
                     System.out.print(new String(kv.getQualifier()) + " ");
-                    System.out.print(kv.getTimestamp() + " ");
+                 //   System.out.print(kv.getTimestamp() + " ");
                     System.out.println(new String(kv.getValue()));
                  }
              }
@@ -138,12 +141,12 @@ public class HBaseDB {
     
     public static void  main (String [] agrs) {
         try {
-          String tablename = "colorJu";
-         /*     String[] familys = {"grade", "course"};
-            HBaseDB.creatTable(tablename, familys);
+          String tablename = "imageDB";
+             String[] familys = {"grade", "course"};
+      //      HBaseDB.creatTable(tablename, familys);
              
             //add record zkb
-            HBaseDB.addRecord(tablename,"zkb","grade","","5");
+         /*    HBaseDB.addRecord(tablename,"zkb","grade","","5");
             HBaseDB.addRecord(tablename,"zkb","course","","90");
             HBaseDB.addRecord(tablename,"zkb","course","math","97");
             HBaseDB.addRecord(tablename,"zkb","course","art","87");
@@ -161,8 +164,10 @@ public class HBaseDB {
             HBaseDB.delRecord(tablename, "baoniu");
             HBaseDB.getAllRecord(tablename);
           */     
-            System.out.println("===========show all record========");
-            HBaseDB.getAllRecord(tablename);
+        //    System.out.println("===========show all record========");
+    //  HBaseDB.getAllRecord(tablename);
+  HBaseDB.deleteTable(tablename);
+     
         } catch (Exception e) {
             e.printStackTrace();
         }

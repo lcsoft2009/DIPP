@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="23" version="2.0">
+<workbench progressCount="20" version="2.0">
 <workbenchAdvisor/>
-<window height="790" maximized="true" width="980" x="1494" y="142">
+<window height="792" width="976" x="1650" y="280">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -18,9 +18,9 @@
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="184" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ant.ui.internal.editor.AntEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -33,20 +33,35 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="addJpegToHib.java" partName="addJpegToHib.java" path="/home/hadoop/workspace/addJpegToHib/src/addJpegToHib.java" title="addJpegToHib.java" tooltip="addJpegToHib/src/addJpegToHib.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/addJpegToHib/src/addJpegToHib.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JpegFromHib.java" partName="JpegFromHib.java" path="/home/hadoop/workspace/jpegFromHib/src/JpegFromHib.java" title="JpegFromHib.java" tooltip="jpegFromHib/src/JpegFromHib.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/jpegFromHib/src/JpegFromHib.java"/>
+<editorState selectionHPixel="0" selectionLength="0" selectionOffset="2705"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DownloaderRecordReader.java" partName="DownloaderRecordReader.java" path="/home/hadoop/workspace/DownloaderWithHbase/src/DownloaderRecordReader.java" title="DownloaderRecordReader.java" tooltip="DownloaderWithHbase/src/DownloaderRecordReader.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DownloaderWithHbase/src/DownloaderRecordReader.java"/>
 <editorState selectionHPixel="0" selectionLength="0" selectionOffset="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Im2Gray.java" partName="Im2Gray.java" path="/home/hadoop/workspace/Im2Gray/src/com/liangchu/Im2Gray.java" title="Im2Gray.java" tooltip="Im2Gray/src/com/liangchu/Im2Gray.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Im2Gray/src/com/liangchu/Im2Gray.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DownloaderInputFormat.java" partName="DownloaderInputFormat.java" path="/home/hadoop/workspace/DownloaderWithHbase/src/DownloaderInputFormat.java" title="DownloaderInputFormat.java" tooltip="DownloaderWithHbase/src/DownloaderInputFormat.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DownloaderWithHbase/src/DownloaderInputFormat.java"/>
 <editorState selectionHPixel="0" selectionLength="0" selectionOffset="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Downloader.java" partName="Downloader.java" path="/home/hadoop/workspace/Downloader/src/Downloader.java" title="Downloader.java" tooltip="Downloader/src/Downloader.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Downloader/src/Downloader.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HipiJob.java" partName="HipiJob.java" path="/home/hadoop/workspace/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/HipiJob.java" title="HipiJob.java" tooltip="DownloaderWithHbase/src/hipi/imagebundle/mapreduce/HipiJob.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/HipiJob.java"/>
+<editorState selectionHPixel="0" selectionLength="0" selectionOffset="0"/>
+</editor>
+<editor focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageBundleInputFormat.java" partName="ImageBundleInputFormat.java" path="/home/hadoop/workspace/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleInputFormat.java" title="ImageBundleInputFormat.java" tooltip="DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleInputFormat.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleInputFormat.java"/>
+<editorState selectionHPixel="0" selectionLength="0" selectionOffset="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageBundleRecordReader.java" partName="ImageBundleRecordReader.java" path="/home/hadoop/workspace/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleRecordReader.java" title="ImageBundleRecordReader.java" tooltip="DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleRecordReader.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleRecordReader.java"/>
 <editorState selectionHPixel="0" selectionLength="0" selectionOffset="0"/>
 </editor>
 </editors>
@@ -55,13 +70,22 @@
 <view id="org.eclipse.search.ui.views.SearchView" partName="Search">
 <viewState isPinned="false">
 <view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
-<view IMemento.internal.id="org.eclipse.jdt.ui.JavaSearchResultPage" org.eclipse.jdt.search.resultpage.grouping="3" org.eclipse.jdt.search.resultpage.limit="1000" org.eclipse.jdt.search.resultpage.limit_enabled="TRUE" org.eclipse.jdt.search.resultpage.sorting="1" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2"/>
 </viewState>
 </view>
 <view id="org.tigris.subversion.subclipse.ui.history.HistoryView" partName="SVN 资源历史记录">
 <viewState/>
 </view>
-<view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
+<view id="org.eclipse.ui.views.TaskList" partName="Tasks">
+<viewState columnWidth0="43" columnWidth1="19" columnWidth2="253" columnWidth3="78" columnWidth4="153" columnWidth5="352" columnWidth6="0" horizontalPosition="0" verticalPosition="0">
+<columnOrder columnOrderIndex="0"/>
+<columnOrder columnOrderIndex="1"/>
+<columnOrder columnOrderIndex="2"/>
+<columnOrder columnOrderIndex="3"/>
+<columnOrder columnOrderIndex="4"/>
+<columnOrder columnOrderIndex="5"/>
+<columnOrder columnOrderIndex="6"/>
+</viewState>
+</view>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
 </view>
@@ -76,7 +100,7 @@
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
-<viewState columnWidth0="832" columnWidth1="226" columnWidth2="153" columnWidth3="476" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
+<viewState columnWidth0="1368" columnWidth1="226" columnWidth2="153" columnWidth3="476" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
 <columnOrder columnOrderIndex="0"/>
 <columnOrder columnOrderIndex="1"/>
 <columnOrder columnOrderIndex="2"/>
@@ -86,7 +110,9 @@
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
 <viewState group_libraries="1" isWindowWorkingSet="false" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
-<customFilters userDefinedPatternsEnabled="false">&#x0A;<xmlDefinedFilters>&#x0A;<child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
+<customFilters userDefinedPatternsEnabled="false">
+<xmlDefinedFilters>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.LocalTypesFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.StaticsFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter" isEnabled="false"/>
@@ -114,7 +140,8 @@
 </view>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks" partName="Task List">
 <viewState linkWithEditor="true" presentation="org.eclipse.mylyn.tasks.ui.categorized">
-<org.eclipse.mylyn.tasklist.ui.views.tasklist.sortIndex>&#x0A;<sorter sortDirection="1" sortIndex="0"/>
+<org.eclipse.mylyn.tasklist.ui.views.tasklist.sortIndex>
+<sorter sortDirection="1" sortIndex="0"/>
 </org.eclipse.mylyn.tasklist.ui.views.tasklist.sortIndex>
 </viewState>
 </view>
@@ -122,9 +149,11 @@
 <view id="org.tigris.subversion.subclipse.ui.repository.RepositoriesView" partName="SVN 资源库">
 <viewState/>
 </view>
-<view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
+<view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc">
+<viewState/>
+</view>
 </views>
-<perspectives activePart="org.eclipse.ui.views.ProblemView" activePerspective="org.apache.hadoop.eclipse.Perspective">
+<perspectives activePart="org.eclipse.ui.navigator.ProjectExplorer" activePerspective="org.apache.hadoop.eclipse.Perspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
@@ -183,45 +212,63 @@
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
 <fastViewBars/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="left">&#x0A;<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
+<layout>
+<mainWindow>
+<info folder="true" part="left">
+<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="Hierarchy"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.junit.ResultView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="left">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="left">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.24950495" ratioLeft="252" ratioRight="758" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.75" ratioLeft="531" ratioRight="177" relationship="4" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
+<info part="org.eclipse.ui.editorss" ratio="0.39479905" ratioLeft="501" ratioRight="768" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.83648497" ratioLeft="752" ratioRight="147" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
-<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@15b4492" ratio="0.74934036" ratioLeft="568" ratioRight="190" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.mylyn.tasks.ui.views.tasks" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="Task List"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">&#x0A;<part id="0"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@15b4492" ratio="0.74934036" ratioLeft="568" ratioRight="190" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.mylyn.tasks.ui.views.tasks" appearance="2" expanded="2">
+<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="Task List"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@bc6007" ratio="0.49905837" ratioLeft="265" ratioRight="266" relationship="4" relative="org.eclipse.ui.internal.ViewStack@15b4492">&#x0A;<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@bc6007" ratio="0.49905837" ratioLeft="265" ratioRight="266" relationship="4" relative="org.eclipse.ui.internal.ViewStack@15b4492">
+<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -262,13 +309,13 @@
 <new_wizard_action id="org.eclipse.ui.wizards.new.folder"/>
 <new_wizard_action id="org.eclipse.ui.wizards.new.file"/>
 <new_wizard_action id="org.eclipse.ui.editors.wizards.UntitledTextFileWizard"/>
-<view id="org.eclipse.ui.navigator.ProjectExplorer"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.ui.views.TaskList"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.apache.hadoop.eclipse.view.servers"/>
 <view id="org.eclipse.search.ui.views.SearchView"/>
+<view id="org.eclipse.ui.navigator.ProjectExplorer"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
 <layout>
@@ -288,8 +335,8 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.2750197" ratioLeft="349" ratioRight="920" relationship="2" relative="org.apache.hadoop.eclipse.perspective.left"/>
-<info folder="true" part="org.apache.hadoop.eclipse.perspective.bottom" ratio="0.046718575" ratioLeft="42" ratioRight="857" relationship="4" relative="org.eclipse.ui.editorss">
+<info part="org.eclipse.ui.editorss" ratio="0.320725" ratioLeft="407" ratioRight="862" relationship="2" relative="org.apache.hadoop.eclipse.perspective.left"/>
+<info folder="true" part="org.apache.hadoop.eclipse.perspective.bottom" ratio="0.64849836" ratioLeft="583" ratioRight="316" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
@@ -353,26 +400,39 @@
 <view id="org.tigris.subversion.subclipse.ui.history.HistoryView"/>
 <view id="org.eclipse.mylyn.tasks.ui.views.repositories"/>
 <fastViewBars/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="top">&#x0A;<folder activePageID="org.tigris.subversion.subclipse.ui.repository.RepositoriesView" appearance="2" expanded="2">&#x0A;<page content="org.tigris.subversion.subclipse.ui.repository.RepositoriesView" label="SVN 资源库"/>
+<layout>
+<mainWindow>
+<info folder="true" part="top">
+<folder activePageID="org.tigris.subversion.subclipse.ui.repository.RepositoriesView" appearance="2" expanded="2">
+<page content="org.tigris.subversion.subclipse.ui.repository.RepositoriesView" label="SVN 资源库"/>
 <page content="org.tigris.subversion.subclipse.ui.annotations.AnnotateView" label="SVN 注释"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7494866" ratioLeft="730" ratioRight="244" relationship="2" relative="top">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7494866" ratioLeft="730" ratioRight="244" relationship="2" relative="top">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.399384" ratioLeft="389" ratioRight="585" relationship="2" relative="top"/>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@18db76b" ratio="0.6995448" ratioLeft="461" ratioRight="198" relationship="4" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.tigris.subversion.subclipse.ui.history.HistoryView" appearance="2" expanded="2">&#x0A;<page content="org.tigris.subversion.subclipse.ui.history.HistoryView" label="SVN 资源历史记录"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">&#x0A;<part id="0"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@18db76b" ratio="0.6995448" ratioLeft="461" ratioRight="198" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.tigris.subversion.subclipse.ui.history.HistoryView" appearance="2" expanded="2">
+<page content="org.tigris.subversion.subclipse.ui.history.HistoryView" label="SVN 资源历史记录"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@167de91" ratio="0.6995448" ratioLeft="461" ratioRight="198" relationship="4" relative="top">&#x0A;<folder activePageID="org.eclipse.mylyn.tasks.ui.views.repositories" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.mylyn.tasks.ui.views.repositories" label="Task Repositories"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">&#x0A;<part id="0"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@167de91" ratio="0.6995448" ratioLeft="461" ratioRight="198" relationship="4" relative="top">
+<folder activePageID="org.eclipse.mylyn.tasks.ui.views.repositories" appearance="2" expanded="2">
+<page content="org.eclipse.mylyn.tasks.ui.views.repositories" label="Task Repositories"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -383,154 +443,175 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Im2Gray/src/com/liangchu/Im2Gray.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Im2Gray/src/hipi/image/FloatImage.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Downloader/src/Downloader.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Downloader/src/hipi/imagebundle/HipiImageBundle.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Im2Gray/src/com/liangchu/Im2Gray.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ImageSearch/src/com/liangchu/http/servlet/HelloServlet.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ImageSearch/src/com/liangchu/ImageSearch.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ImageSearch/src/com/liangchu/ImageSearch.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ImageDBHbase/src/com/liangchu/ImageDBHbase.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ImageDBHbase/src/com/liangchu/http/servlet/HelloServlet.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ImageSearch/src/com/liangchu/http/servlet/HelloServlet.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Downloader/src/Downloader.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/addJpegToHib/src/Downloader.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/addJpegToHib/src/addJpegToHib.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Downloader/src/Downloader.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Downloader/src/Downloader.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/addJpegToHib/src/addJpegToHib.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/org/apache/myhadoop/io/ArrayFile.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/org/apache/hadoop/io/BloomMapFile.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/org/apache/hadoop/io/ArrayFile.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/org/apache/hadoop/io/BloomMapFile.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/org/apache/hadoop/io/DataInputBuffer.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/org/apache/myhadoop/io/BloomMapFile.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/org/apache/myhadoop/io/BinaryComparable.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/a.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/BooleanWritable.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/branch-0.20-security-203/src/core/org/apache/hadoop/io/BooleanWritable.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/Downloader.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/jpegFromHib/src/JpegFromHib.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/jpegFromHib/src/hipi/util/ByteUtils.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=jpegFromHib/\/usr\/Java\/jdk1.6.0_29\/jre\/lib\/rt.jar&lt;java.lang(Integer.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/jpegFromHib/src/JpegFromHib.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/DownloaderRecordReader.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/DownloaderInputFormat.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/HipiJob.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleInputFormat.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleRecordReader.java"/>
 </editors>
-<item historyLabel="FloatImage.java" index="1">
-<position info="not_deleted" x="621" y="10"/>
+<item historyLabel="BloomMapFile.java" index="1">
+<position info="not_deleted" x="1183" y="0"/>
 </item>
-<item historyLabel="Im2Gray.java" index="0">
+<item historyLabel="ArrayFile.java" index="2">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="BloomMapFile.java" index="3">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="BloomMapFile.java" index="3">
+<position info="not_deleted" x="1146" y="0"/>
+</item>
+<item historyLabel="DataInputBuffer.java" index="4">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="ArrayFile.java" index="0">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="BloomMapFile.java" index="5">
+<position info="not_deleted" x="1148" y="0"/>
+</item>
+<item historyLabel="ArrayFile.java" index="0">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="ArrayFile.java" index="0">
+<position info="not_deleted" x="1920" y="0"/>
+</item>
+<item historyLabel="BinaryComparable.java" index="6">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="BloomMapFile.java" index="5">
+<position info="not_deleted" x="3272" y="72"/>
+</item>
+<item historyLabel="BloomMapFile.java" index="5">
+<position info="not_deleted" x="3825" y="0"/>
+</item>
+<item historyLabel="BinaryComparable.java" index="6">
 <position/>
 </item>
-<item historyLabel="FloatImage.java" index="1">
-<position info="not_deleted" x="2866" y="5"/>
-</item>
-<item historyLabel="Im2Gray.java" index="0">
-<position info="not_deleted" x="1875" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="2">
+<item historyLabel="a.java" index="7">
 <position/>
 </item>
-<item historyLabel="HipiImageBundle.java" index="3">
-<position info="not_deleted" x="1160" y="15"/>
-</item>
-<item historyLabel="Downloader.java" index="2">
-<position info="not_deleted" x="5734" y="0"/>
-</item>
-<item historyLabel="FloatImage.java" index="1">
-<position info="not_deleted" x="2866" y="5"/>
-</item>
-<item historyLabel="Im2Gray.java" index="0">
-<position info="not_deleted" x="2008" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="2">
-<position info="not_deleted" x="5734" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="2">
-<position info="not_deleted" x="4265" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="2">
+<item historyLabel="BooleanWritable.java" index="8">
 <position/>
 </item>
-<item historyLabel="Downloader.java" index="2">
+<item historyLabel="BooleanWritable.java" index="9">
+<position info="not_deleted" x="0" y="2634"/>
+</item>
+<item historyLabel="BooleanWritable.java" index="8">
 <position/>
 </item>
-<item historyLabel="Downloader.java" index="2">
-<position info="not_deleted" x="3769" y="0"/>
+<item historyLabel="BooleanWritable.java" index="9">
+<position info="not_deleted" x="0" y="2634"/>
 </item>
-<item historyLabel="HipiImageBundle.java" index="3">
-<position info="not_deleted" x="12818" y="8"/>
-</item>
-<item historyLabel="Downloader.java" index="2">
+<item historyLabel="BooleanWritable.java" index="8">
 <position/>
 </item>
-<item historyLabel="Downloader.java" index="2">
+<item historyLabel="BooleanWritable.java" index="8">
 <position/>
 </item>
-<item historyLabel="Im2Gray.java" index="4">
+<item historyLabel="BooleanWritable.java" index="8">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="Downloader.java" index="10">
 <position/>
 </item>
-<item historyLabel="HelloServlet.java" index="5">
+<item historyLabel="BooleanWritable.java" index="8">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="Downloader.java" index="10">
 <position/>
 </item>
-<item historyLabel="Im2Gray.java" index="4">
-<position info="not_deleted" x="1604" y="0"/>
+<item historyLabel="BooleanWritable.java" index="8">
+<position info="not_deleted" x="1047" y="15"/>
 </item>
-<item historyLabel="ImageSearch.java" index="6">
+<item historyLabel="Downloader.java" index="10">
+<position info="not_deleted" x="4867" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="366" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="366" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="1993" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="1508" y="0"/>
+</item>
+<item historyLabel="ByteUtils.java" index="12">
+<position info="not_deleted" x="1892" y="5"/>
+</item>
+<item historyLabel="ByteUtils.java" index="12">
+<position info="not_deleted" x="2133" y="1"/>
+</item>
+<item historyLabel="ByteUtils.java" index="12">
+<position info="not_deleted" x="2044" y="3"/>
+</item>
+<item historyLabel="ByteUtils.java" index="12">
+<position info="not_deleted" x="2134" y="0"/>
+</item>
+<item historyLabel="ByteUtils.java" index="12">
+<position info="not_deleted" x="2155" y="0"/>
+</item>
+<item historyLabel="Integer.class" index="13">
+<position info="not_deleted" x="6203" y="11"/>
+</item>
+<item historyLabel="ByteUtils.java" index="12">
+<position info="not_deleted" x="2155" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="1508" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="1941" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="1905" y="12"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="1895" y="5"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="1884" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="11">
+<position info="not_deleted" x="2711" y="0"/>
+</item>
+<item historyLabel="JpegFromHib.java" index="14">
 <position/>
 </item>
-<item historyLabel="ImageSearch.java" index="6">
+<item historyLabel="DownloaderRecordReader.java" index="15">
 <position/>
 </item>
-<item historyLabel="ImageSearch.java" index="7">
+<item historyLabel="DownloaderInputFormat.java" index="16">
 <position/>
 </item>
-<item historyLabel="ImageDBHbase.java" index="8">
+<item historyLabel="HipiJob.java" index="17">
 <position/>
 </item>
-<item historyLabel="ImageSearch.java" index="7">
+<item historyLabel="ImageBundleInputFormat.java" index="18">
 <position/>
 </item>
-<item historyLabel="ImageSearch.java" index="7">
-<position info="not_deleted" x="1005" y="0"/>
-</item>
-<item historyLabel="HelloServlet.java" index="9">
+<item historyLabel="ImageBundleRecordReader.java" index="19">
 <position/>
 </item>
-<item historyLabel="HelloServlet.java" index="10">
-<position/>
-</item>
-<item historyLabel="ImageSearch.java" index="7">
-<position info="not_deleted" x="1005" y="0"/>
-</item>
-<item historyLabel="ImageSearch.java" index="7">
-<position info="not_deleted" x="3489" y="0"/>
-</item>
-<item historyLabel="ImageSearch.java" index="7">
-<position info="not_deleted" x="5923" y="59"/>
-</item>
-<item historyLabel="HelloServlet.java" index="10">
-<position info="not_deleted" x="1917" y="0"/>
-</item>
-<item historyLabel="ImageSearch.java" index="7">
-<position info="not_deleted" x="5923" y="59"/>
-</item>
-<item historyLabel="HelloServlet.java" index="10">
-<position info="not_deleted" x="1848" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="11">
-<position info="not_deleted" x="4330" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="11">
-<position info="not_deleted" x="2275" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="11">
-<position info="not_deleted" x="2275" y="0"/>
-</item>
-<item historyLabel="Downloader.java" index="12">
-<position/>
-</item>
-<item historyLabel="addJpegToHib.java" index="13">
-<position/>
-</item>
-<item historyLabel="Downloader.java" index="14">
-<position/>
-</item>
-<item historyLabel="addJpegToHib.java" index="13">
-<position info="not_deleted" x="2786" y="0"/>
-</item>
-<item historyLabel="Im2Gray.java" index="4">
-<position/>
-</item>
-<item historyLabel="Downloader.java" index="15">
-<position/>
-</item>
-<item active="true" historyLabel="addJpegToHib.java" index="16">
+<item active="true" historyLabel="ImageBundleInputFormat.java" index="18">
 <position/>
 </item>
 </navigationHistory>
@@ -550,14 +631,32 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Downloader.java" tooltip="Downloader/src/Downloader.java">
-<persistable path="/Downloader/src/Downloader.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageBundleRecordReader.java" tooltip="DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleRecordReader.java">
+<persistable path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleRecordReader.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Im2Gray.java" tooltip="Im2Gray/src/com/liangchu/Im2Gray.java">
-<persistable path="/Im2Gray/src/com/liangchu/Im2Gray.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageBundleInputFormat.java" tooltip="DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleInputFormat.java">
+<persistable path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/ImageBundleInputFormat.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Downloader.java" tooltip="addJpegToHib/src/Downloader.java">
-<persistable path="/addJpegToHib/src/Downloader.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HipiJob.java" tooltip="DownloaderWithHbase/src/hipi/imagebundle/mapreduce/HipiJob.java">
+<persistable path="/DownloaderWithHbase/src/hipi/imagebundle/mapreduce/HipiJob.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DownloaderInputFormat.java" tooltip="DownloaderWithHbase/src/DownloaderInputFormat.java">
+<persistable path="/DownloaderWithHbase/src/DownloaderInputFormat.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DownloaderRecordReader.java" tooltip="DownloaderWithHbase/src/DownloaderRecordReader.java">
+<persistable path="/DownloaderWithHbase/src/DownloaderRecordReader.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JpegFromHib.java" tooltip="jpegFromHib/src/JpegFromHib.java">
+<persistable path="/jpegFromHib/src/JpegFromHib.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Integer.class" tooltip="java.lang.Integer">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=jpegFromHib/\/usr\/Java\/jdk1.6.0_29\/jre\/lib\/rt.jar&lt;java.lang(Integer.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ByteUtils.java" tooltip="jpegFromHib/src/hipi/util/ByteUtils.java">
+<persistable path="/jpegFromHib/src/hipi/util/ByteUtils.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Downloader.java" tooltip="DownloaderWithHbase/src/Downloader.java">
+<persistable path="/DownloaderWithHbase/src/Downloader.java"/>
 </file>
 </mruList>
 </workbench>

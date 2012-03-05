@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<item value="filter_imports;" key="filters_last_used"/>
 	<item value="/usr/local/hadoop" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="/home/hadoop/trunk/hadoop-common-project/hadoop-common" key="org.eclipse.jdt.ui.last.external.project"/>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
@@ -38,11 +39,11 @@
 		<item value="false" key="jarOptionsWizardPage.STORE_USE_SRC_FOLDERS"/>
 		<item value="" key="jarOptionsWizardPage.DESCRIPTION_LOCATION"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
-			<item value="/usr/local/hadoop/Downloador.jar"/>
-			<item value="/usr/local/hadoop/addImagetoHib.jar"/>
+			<item value="/usr/local/hadoop/jpegfromhib.jar"/>
+			<item value="/usr/local/hadoop/DownloadorWithHbase.jar"/>
 			<item value="/usr/local/hadoop/ImageSearch.jar"/>
-			<item value="/usr/local/hadoop/downloador.jar"/>
-			<item value="/usr/local/hadoop/IDownloador.jar"/>
+			<item value="/usr/local/hadoop/ImageHSV.jar"/>
+			<item value="/usr/local/hadoop/ImageDBSearch.jar"/>
 		</list>
 	</section>
 	<section name="RefactoringWizard.preview">

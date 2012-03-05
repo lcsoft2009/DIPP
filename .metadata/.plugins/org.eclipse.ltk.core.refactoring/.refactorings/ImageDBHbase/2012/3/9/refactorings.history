@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 package(s) to &apos;DownloaderWithHbase/src&apos;&#x0A;- Original project: &apos;ImageDBHbase&apos;&#x0A;- Destination element: &apos;DownloaderWithHbase/src&apos;&#x0A;- Original element: &apos;ImageDBHbase/src/com.liangchu.image&apos;" description="Copy package" destination="/src" element1="/src&lt;com.liangchu.image" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" log="/src&lt;com.liangchu.image&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyPackages" stamp="1330768267472" version="1.0"/>
+</session>

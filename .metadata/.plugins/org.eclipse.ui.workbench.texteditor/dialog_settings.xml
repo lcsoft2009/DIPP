@@ -13,16 +13,16 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wholeword"/>
-		<item value="" key="selection"/>
+		<item value="org.apache.commons.lo" key="selection"/>
 		<list key="findhistory">
-			<item value="write"/>
-			<item value="camera"/>
-			<item value="hipi.map.tasks"/>
-			<item value="conf"/>
-			<item value="nextKeyValue"/>
-			<item value="WritableComparator"/>
-			<item value="record"/>
-			<item value="jpg hib"/>
+			<item value="org.apache.commons.long"/>
+			<item value="_image"/>
+			<item value="readBundleHeader"/>
+			<item value="_imageCount"/>
+			<item value="save"/>
+			<item value="totalUrls"/>
+			<item value="photoes"/>
+			<item value="savePhotos"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -95,7 +95,7 @@ public class addJpegToHib extends Configured implements Tool{
 		{
 			if(key.get()){
 				FileSystem fileSystem = FileSystem.get(conf);
-				HipiImageBundle hib = new HipiImageBundle(new Path(conf.get("downloader.outfile")), conf);
+				HipiImageBundle hib = new HipiImageBundle(new Path(conf.get("addJpegToHib.outfile")), conf);
 				hib.open(HipiImageBundle.FILE_MODE_WRITE, true);
 				for (Text temp_string : values) {
 					Path temp_path = new Path(temp_string.toString());
@@ -139,10 +139,10 @@ public class addJpegToHib extends Configured implements Tool{
 		
 		
 		//conf.setInt("downloader.nodes", nodes);
-		conf.setStrings("downloader.outfile", outputFile);
-		conf.setStrings("downloader.outpath", outputPath);
+		conf.setStrings("addJpegToHib.outfile", outputFile);
+		conf.setStrings("addJpegToHib.outpath", outputPath);
 
-		Job job = new Job(conf, "downloader");
+		Job job = new Job(conf, "addJpegToHib");
 		job.setJarByClass(addJpegToHib.class);
 		job.setMapperClass(addJpegToHibMapper.class);
 		job.setReducerClass(DownloaderReducer.class);

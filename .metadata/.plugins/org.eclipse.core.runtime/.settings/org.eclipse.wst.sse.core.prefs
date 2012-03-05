@@ -1,3 +1,3 @@
-#Mon Feb 27 16:52:57 JST 2012
-task-tag-projects-already-scanned=Downloader,myHadoop,Im2Gray,Imager,RandomWriter,covariance,dumphipi,jpegfromhib,AverageImageCull,branch-0.20-security-203,branch-1.0,is,ImageDB,ImageDBHbase,ImageSearch,addJpegToHib
+#Sun Mar 04 20:45:39 JST 2012
+task-tag-projects-already-scanned=Downloader,myHadoop,Im2Gray,Imager,RandomWriter,covariance,dumphipi,AverageImageCull,branch-0.20-security-203,branch-1.0,is,ImageDB,ImageDBHbase,ImageSearch,addJpegToHib,DownloaderWithHbase,ImageCwal,jpegFromHib
 eclipse.preferences.version=1

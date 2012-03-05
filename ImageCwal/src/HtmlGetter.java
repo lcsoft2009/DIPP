@@ -1,0 +1,306 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+/**
+ * HTML parser, can down load all the photo over the specified page by url.
+ * web小爬虫
+ * @author chenzhehui 
+ *
+ */
+public class HtmlGetter {
+ 
+ private String strUrl=null ;
+ 
+ private URL url=null ;
+ 
+ private StringBuffer content=new StringBuffer() ;
+ 
+ private Set<String> photoes=null ;
+ 
+ private Set<String> htmlURLs=null ;
+
+ private String photoSavePath="D:/" ;
+ 
+ private boolean includeOtherSite=true ; //是否包含其他站点的url
+ 
+ /**
+  * 
+  * @param url  指定URL
+  * @param includeOtherSite  查找返回内容中的URL是否包括本站以外的
+  * @param withInit   构造时初始化，获取页面内容，获取图片路径，获取页面包含的url路径
+  * @throws Exception
+  */
+ public HtmlGetter(String url,boolean includeOtherSite,boolean withInit) throws Exception{
+  this.url=new URL(url) ;
+  this.strUrl=url ;
+  this.includeOtherSite=includeOtherSite ;
+  if(withInit){
+   initHtml() ;
+  }
+ }
+ 
+ public void initHtml() throws Exception{
+  // get the HTML source
+  BufferedReader br=null ;
+  try{
+   br=new BufferedReader(new InputStreamReader(url.openStream())) ;
+   String row=null ;
+   while(null!=(row=br.readLine())){
+    this.content.append(row) ;
+   }
+  }catch(FileNotFoundException ex){
+   System.out.println(this.strUrl+" can't not found(Page).") ;
+  }catch(ConnectException ex){
+   System.out.println(this.strUrl+" connection time out.") ;
+  }catch(Exception ex){
+   ex.printStackTrace() ;
+  }finally{
+   if(null!=br){
+    br.close() ;
+   }
+  }
+  
+  //get the set of specified HTML inner photos.
+  Set<String> set=new HashSet<String>() ;
+  Pattern pat=Pattern.compile("(?<=(src=\"|url\\())\\S*\\.jpg") ;
+  Matcher m=pat.matcher(this.getContent()) ;
+  while(m.find()){
+   String temp=m.group(0) ;
+   if(temp.contains("http")){
+    set.add(temp) ;
+   }else{
+    temp=temp.substring(2, temp.length()) ;
+    set.add(this.strUrl+"/"+temp) ;
+   }
+  }
+  this.photoes=set ;
+  
+  //get the set of specified HTML inner URL 
+  Set<String> urls=new HashSet<String>() ;
+  pat=Pattern.compile("(?<=\")(http|https):\\S*?(?=\")") ;
+  m=pat.matcher(this.getContent()) ;
+  StringBuffer sb=new StringBuffer() ;
+  while(m.find()){
+   String temp=m.group(0) ;
+   if(!temp.matches("http:\\S*?\\.(jpg|bmp|js|gif|png|ico|pdf|exe|jar|doc|cxl|css)")){
+    if(this.includeOtherSite){
+     urls.add(temp) ;
+    }else{
+     if(temp.contains(this.url.getAuthority())){
+      urls.add(temp) ;
+     }
+    }
+   }
+  }
+  this.htmlURLs =urls ;
+ }
+
+ public Set<String> getPhotoes()throws Exception{
+  return this.photoes ;
+ }
+ 
+ public Set<String> getHtmlURLs()throws Exception{
+  return this.htmlURLs ;
+ }
+ 
+ /**
+  * get the content of the specified page.
+  * @return
+  * @throws Exception
+  */
+ public String getContent()throws Exception{
+  return this.content.toString() ;
+ }
+ 
+ public void setPhotoSavePath(String path){
+  if(null!=path&&!"".equals(path.trim())){
+   this.photoSavePath=path ;
+  }
+ }
+ 
+ /**
+  * save photo.
+  * @throws Exception
+  */
+ public void savePhotos()throws Exception{
+  Set<String> photos=this.getPhotoes() ;
+  savePhotos(photos,this.photoSavePath) ;
+ }
+
+ 
+ Set<String> totalPhotos=new HashSet<String>() ;
+ Set<String> totalUrls=new HashSet<String>() ;
+ /**
+  * the method may can't not stop.if u call it ,please be careful. my god....
+  * @throws Exception
+  */
+ public void saveAllPhotos(HtmlGetter hg)throws Exception{
+  
+  if(!this.totalPhotos.containsAll(hg.photoes)){
+   hg.photoes.removeAll(this.totalPhotos) ; //只留下未重复的
+   hg.savePhotos(hg.photoes, hg.photoSavePath) ; //保存
+   this.totalPhotos.addAll(hg.photoes) ;  //总记录把未有的记录加载，避免重复。
+  }
+  
+  if(!this.totalUrls.containsAll(hg.htmlURLs)){
+   hg.htmlURLs.removeAll(this.totalUrls) ;  //保留未分析的URL
+   this.totalUrls.addAll(hg.htmlURLs) ;   //添加总记录未添加的部分。
+
+   try{
+   for(String page:hg.htmlURLs){
+    HtmlGetter hgTemp=new HtmlGetter(page,hg.includeOtherSite,true) ;
+    hgTemp.setPhotoSavePath(hg.photoSavePath) ;
+    this.saveAllPhotos(hgTemp) ;
+   }
+   }
+   catch(Exception e)
+   {}
+  }
+ }
+ 
+ /**
+  * 保存图片
+  * @param photos  图片的URL集合
+  * @param savePath 保存路径
+  * @throws Exception
+  */
+ private void savePhotos(Set<String> photos,String savePath){
+  
+  for(String photo:photos){
+   photo=photo.replaceAll(Pattern.compile("(?<!http:)//").pattern(), "/") ;
+   
+   
+   System.out.println(photo);
+   try   { 
+       File   file=new   File( "/usr/local/hadoop/input/allurls.txt"); 
+       BufferedWriter   out=new   BufferedWriter( new   FileWriter(file,true)); 
+       out.write(photo);
+       out.newLine();
+       out.close(); 
+       out=null; 
+       file=null; 
+   } 
+   catch   (Exception   ex)   { 
+
+   }
+  // this.save(photo, savePath) ; //不使用多线程。
+ //  new Thread(){ //使用多线程。不设置线程数，线程自动启动，开销可能很大，但会自动销毁。
+//   String pho ;
+ //  String path ;
+ //   public void run(){
+ //    saveAllPhotos(hg)(pho,path) ;
+//    }
+//    public void doSave(String s1,String s2){
+//     this.pho=s1 ;
+//     this.path=s2 ;
+//     this.start() ;
+//    }
+//   }.doSave(photo, savePath) ;
+  }
+ }
+ 
+ private void save(String photo,String savePath){
+  String fileName=photo.substring(photo.lastIndexOf("/")<0?0:photo.lastIndexOf("/"), photo.length()) ;
+  InputStream is=null ;
+  OutputStream os=null ;
+  try{
+   URL url=new URL(photo) ;
+   HttpURLConnection uc=(HttpURLConnection)url.openConnection() ;
+   uc.setRequestMethod("GET") ;
+   uc.setConnectTimeout(3000) ; //3秒超时
+   uc.setDoInput(true) ;
+   uc.setDoOutput(true) ;
+   uc.setUseCaches(false) ;
+   uc.addRequestProperty("Accept", "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/x-shockwave-flash, */*"); 
+   uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 2.0.50727; MS-RTC LM 8)"); 
+   uc.connect() ;
+   is=uc.getInputStream() ;
+   Iterator iter=uc.getHeaderFields().keySet().iterator() ;
+   boolean isGzip=false ;
+   while(iter.hasNext()){
+    Object obj=iter.next() ;
+    if(obj!=null){
+     if(obj.toString().indexOf("gzip")!=-1){
+      isGzip=true ;
+      break ;
+     }
+    }
+   }
+   os=new FileOutputStream(savePath+System.currentTimeMillis()+fileName) ;
+   byte[] buffer=new byte[1024*2] ;
+   if(isGzip){
+    GZIPInputStream gis=new GZIPInputStream(is) ;
+    int n=0 ;
+    while((n=gis.read(buffer))!=-1){
+     os.write(buffer,0,n) ;
+    }
+    System.out.println(photo+" had saved.(gzip)") ;
+    
+   }else{
+    int n=0 ;
+    while((n=is.read(buffer))!=-1){
+     os.write(buffer, 0, n) ;
+    }
+    System.out.println(photo+" had saved.") ;
+   }
+  }catch(FileNotFoundException ex){
+   System.out.println(photo+" file not found.") ;
+  }catch(NullPointerException ex){
+   System.out.println(photo+" connection null point.") ;
+  }catch(Exception ex){
+   ex.printStackTrace() ;
+   System.out.println(photo+" can't not save.") ;
+  }finally{
+   if(null!=is){
+    try
+    {
+    is.close() ;
+    }catch(Exception ex){
+     ex.printStackTrace() ;
+    }
+   }
+   if(null!=os){
+    try{
+     os.flush() ;
+     os.close() ;
+    }catch(Exception ex){
+     ex.printStackTrace() ;
+    }
+   }
+  }
+ }
+ 
+
+ public static void main(String[] args)throws Exception{
+  long t1=System.currentTimeMillis() ;
+  HtmlGetter hg=new HtmlGetter("http://www.163.com/",true,true) ;
+  hg.setPhotoSavePath("/home/hadoop/Desktop/cwal") ;
+  hg.saveAllPhotos(hg) ;
+  
+ // System.out.println(hg.url.getAuthority()) ;
+ // for(String s:hg.photoes){
+ //  System.out.println(s) ;
+ // }
+ // hg.savePhotos() ;
+  System.out.println("used time ："+(System.currentTimeMillis()-t1)+" ms") ;
+  
+  
+
+ }
+
+}

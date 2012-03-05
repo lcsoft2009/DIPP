@@ -1,0 +1,163 @@
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.w3c.dom.NodeList;
+
+import sun.net.www.http.HttpClient;
+
+import com.sun.corba.se.impl.orbutil.graph.Node;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Parser;
+import com.sun.org.apache.xml.internal.security.signature.NodeFilter;
+
+public class main {
+	private static String phoUrl = "http://photo.renren.com/photo/310361538/album-366765567";
+	private static PicDoaloader picDoaloader=new PicDoaloader();
+	private static String filePath = "D://image//相册集";
+	private static int cunt = 343;
+
+	public static void main(String[] args) {
+		for (int i = 0; i < 4; i++) {
+			fetchImageOrLink(fetchByClass("img"), makeConnection(phoUrl+"?curpage="+i));
+		}
+
+	}
+
+	private static byte[] makeConnection(String phoUrl) {
+		byte[] responseBody = null;
+		HttpClient httpClient = new HttpClient();
+		GetMethod postMethod2 = new GetMethod(phoUrl);
+		String cokkk = "自己看firefox去！";
+		postMethod2.setRequestHeader("Cookie", cokkk);// 将“临时证明”放入下一次的发贴请求操作中
+		postMethod2.setRequestHeader("Host", "photo.renren.com");
+		postMethod2
+				.setRequestHeader(
+						"User-Agent",
+						"Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2");
+		postMethod2
+				.setRequestHeader("Accept",
+						"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");// 以上操作是模拟浏览器的操作，使用服务器混淆
+
+		// postMethod2.setRequestBody(data2);
+		try {
+			httpClient.executeMethod(postMethod2);
+		} catch (HttpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 这里用流来读页面
+
+		InputStream in = null;
+		try {
+			in = postMethod2.getResponseBodyAsStream();
+			if (in != null) {
+				byte[] tmp = new byte[4096];
+				int bytesRead = 0;
+				ByteArrayOutputStream buffer = new ByteArrayOutputStream(1024);
+				while ((bytesRead = in.read(tmp)) != -1) {
+					buffer.write(tmp, 0, bytesRead);
+				}
+				responseBody = buffer.toByteArray();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// return postMethod2.getResponseBody();
+		return responseBody;
+	}
+
+	private static void fetchImageOrLink(NodeFilter filter, byte[] responseBody) {
+		Parser parser = Parser.createParser(new String(responseBody), "utf-8");
+		NodeList nodelist = null;
+		try {
+			parser.setEncoding("UTF-8");
+
+			nodelist = parser.parse(filter);
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// System.out.println(nodelist.toHtml());
+		boolean flag = false;
+		for (int i = 0; i < nodelist.size(); i++) {
+			Node tagp = nodelist.elementAt(i);
+
+			NodeList nodel = tagp.getChildren();
+				Node tag = nodel.elementAt(1);
+				if (tag instanceof LinkTag) {
+					//System.out.println(((LinkTag) tag).getLink());
+					fetchImage(fetchById("photo"),makeConnection(((LinkTag) tag).getLink()));
+					//return;
+				}
+				// System.out.println(tag.getChildren().elementAt(1).toHtml());
+
+
+		}
+	}
+
+	private static void fetchImage(NodeFilter fetchById, byte[] makeConnection) {
+		Parser parser = Parser.createParser(new String(makeConnection), "utf-8");
+		PrototypicalNodeFactory p = new PrototypicalNodeFactory(); 
+        p.registerTag(new ScriptTag()); 
+        parser.setNodeFactory(p); 
+        
+        NodeFilter filterJS = new NodeClassFilter(ScriptTag.class); 
+        NodeList nodelistJS=null;
+		try {
+			nodelistJS = parser.extractAllNodesThatMatch(filterJS);
+		} catch (ParserException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		String temp=nodelistJS.elementAt(7).toHtml();
+		int begain=temp.lastIndexOf("largeurl");
+		int last=temp.lastIndexOf("summary");
+		temp=temp.substring(begain+"largeurl".length()+3,last-3).replaceAll("\\\\", "");
+        System.out.println(temp);
+        boolean flag = picDoaloader.saveUrlAs(temp, filePath + "//blob" + cunt+ ".jpeg", null, null);
+        cunt++;
+		System.out.println("Run ok!\nGet URL file " );
+//		if (true) {
+//			return;
+//		}
+//		NodeFilter filter=new TagNameFilter("img");
+//		NodeFilter filter2=new AndFilter(fetchById,filter);
+//		NodeList nodelist = null;
+//		try {
+//			parser.setEncoding("UTF-8");
+//
+//			nodelist = parser.parse(filter2);
+//		} catch (ParserException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		 System.out.println(nodelist.toHtml());
+//		boolean flag = false;
+//		for (int i = 0; i < nodelist.size(); i++) {
+//			Node tagp = nodelist.elementAt(i);
+//			//System.out.println(tagp.toHtml());
+//			if (tagp instanceof ImageTag) {
+//				ImageTag imageTag = (ImageTag) tagp;
+////				 flag = picDoaloader.saveUrlAs(imageTag.getImageURL(),
+////				 filePath + "//blob" + cunt+ ".jpeg", null, null);
+//				cunt++;
+//				System.out.println("Run ok!\nGet URL file " + imageTag.getImageURL());
+//			}
+//		}
+
+	}
+
+	private static NodeFilter fetchById(String id) {
+		NodeFilter filter = new HasAttributeFilter("id", id);
+		return filter;
+	}
+
+	private static NodeFilter fetchByClass(String className) {
+		NodeFilter filter = new HasAttributeFilter("class", "img");
+		return filter;
+	}
+}

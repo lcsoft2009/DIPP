@@ -6,9 +6,22 @@
 <fullyQualifiedTypeName name="JpegFromHibRecordReader"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer$Context"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
-<fullyQualifiedTypeName name="hipi.image.FloatImage"/>
 <fullyQualifiedTypeName name="hipi.experiments.mapreduce.JPEGFileInputFormat.JPEGFileInputFormat"/>
-<fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="com.liangchu.ImageSearch"/>
+<fullyQualifiedTypeName name="org.apache.commons.fileupload.disk.DiskFileItemFactory"/>
+<fullyQualifiedTypeName name="org.apache.commons.fileupload.servlet.ServletFileUpload"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.liangchu.hbase.HBaseDB"/>
+<fullyQualifiedTypeName name="hipi.image.FloatImage"/>
+<fullyQualifiedTypeName name="com.sun.org.apache.xalan.internal.xsltc.compiler.Parser"/>
+<fullyQualifiedTypeName name="com.sun.org.apache.xml.internal.security.signature.NodeFilter"/>
+<fullyQualifiedTypeName name="com.sun.corba.se.impl.orbutil.graph.Node"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.LongWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.SequenceFile"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.BytesWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
 </qualifiedTypeNameHistroy>

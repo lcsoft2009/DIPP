@@ -102,7 +102,7 @@ public class BooleanWritable implements WritableComparable {
                        byte[] b2, int s2, int l2) {
       boolean a = (readInt(b1, s1) == 1) ? true : false;
       boolean b = (readInt(b2, s2) == 1) ? true : false;
-      return ((a == b) ? 0 : (a == false) ? -1 : 1);
+      return  ((a == b) ? 0 : (a == false) ? -1 : 1);
     }
   }
 

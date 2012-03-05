@@ -7,6 +7,7 @@ import hipi.imagebundle.mapreduce.ImageBundleInputFormat;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -14,6 +15,7 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -32,6 +34,9 @@ public class ImageDBHbase extends Configured implements Tool{
 		private Path path;
 		private FileSystem fileSystem;
 		private Configuration conf;
+		private	static String tablename = "imageDB";
+	//	private  String[] familys = {"id","hsv"};
+
 		public void setup(Context jc) throws IOException
 		{
 			conf = jc.getConfiguration();
@@ -43,17 +48,17 @@ public class ImageDBHbase extends Configured implements Tool{
 			if (value != null) {
 	
 				
-				BufferedImage bufferedImage = new BufferedImage(value.getWidth(), value.getHeight(), BufferedImage.TYPE_INT_RGB);
-				float[] data = value.getData();
-				int[] rgb = new int[value.getWidth() * value.getHeight()];
-				for (int i = 0; i < value.getWidth() * value.getHeight(); i++)
-				{
-					int r = Math.min(Math.max((int)(data[i * 3] * 255), 0), 255);
-					int g = Math.min(Math.max((int)(data[i * 3 + 1] * 255), 0), 255);
-					int b = Math.min(Math.max((int)(data[i * 3 + 2] * 255), 0), 255);
-					rgb[i] = r << 16 | g << 8 | b;
-				}
-				bufferedImage.setRGB(0, 0, value.getWidth(), value.getHeight(), rgb, 0, value.getWidth());
+					BufferedImage bufferedImage = new BufferedImage(value.getWidth()/10, value.getHeight()/10, BufferedImage.TYPE_INT_RGB);
+					float[] data = value.getData();
+					int[] rgb = new int[value.getWidth() * value.getHeight()];
+					for (int i = 0; i < value.getWidth()* value.getHeight(); i++)
+					{
+						int r = Math.min(Math.max((int)(data[i * 3] * 255), 0), 255);
+						int g = Math.min(Math.max((int)(data[i * 3 + 1] * 255), 0), 255);
+						int b = Math.min(Math.max((int)(data[i * 3 + 2] * 255), 0), 255);
+						rgb[i] = r << 16 | g << 8 | b;
+					}
+					bufferedImage.setRGB(0, 0, value.getWidth()/10, value.getHeight()/10, rgb, 0, value.getWidth()/10);
 				FqImage imh	=	new FqImage(bufferedImage);
 				imh.setColorJu();
 				String colorJuH1 = Double.toString(imh.colorJuH[1]);
@@ -67,32 +72,26 @@ public class ImageDBHbase extends Configured implements Tool{
 				String colorJuV3 = Double.toString(imh.colorJuV[3]);
 				
 				  //add record 
-				String tablename = "colorJu";
-		        String[] familys = {"id", "hsv"};
-
-				int id=value.hashCode();
+int id=key.hashCode();
 	            try {
-	            	
-	            	HBaseDB.creatTable(tablename, familys);
-	            	
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","h1",colorJuH1);
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","h2",colorJuH2);
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","h3",colorJuH3);
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","s1",colorJuS1);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","s2",colorJuS1);
+		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","s2",colorJuS2);
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","s3",colorJuS3);
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","v1",colorJuV1);
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","v2",colorJuV2);
 		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","v3",colorJuV3);
-		            System.out.println("===========show all record========");
-		            HBaseDB.getAllRecord(tablename);
+		       //     System.out.println("===========show all record========");
+		        //    HBaseDB.getAllRecord(tablename);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-	            
+		
 				
-				context.write(new IntWritable(id), new Text(" "+colorJuH1+" "+colorJuH2+" "+colorJuH3+" "+colorJuS1+" "+colorJuS2+" "+colorJuS3+" "+colorJuV1+" "+colorJuV2+" "+colorJuV3));
+				context.write(new IntWritable(0), new Text(" "+colorJuH1+" "+colorJuH2+" "+colorJuH3+" "+colorJuS1+" "+colorJuS2+" "+colorJuS3+" "+colorJuV1+" "+colorJuV2+" "+colorJuV3));
 			}
 		}
 	}
@@ -102,13 +101,17 @@ public class ImageDBHbase extends Configured implements Tool{
 		private Path path;
 		private ImageHeader head;
 		private Configuration conf;
-		
+
 		public void setup(Context jc) throws IOException
 		{
 			conf = jc.getConfiguration();
 			fileSystem = FileSystem.get(conf);
 			path = new Path( conf.get("imageDBSearch.outdir"));
 			fileSystem.mkdirs(path);
+
+			//int id=value.hashCode();
+           
+            	
 		}
 		
 		public void reduce(IntWritable key, Iterable<Text> values, Context context)
@@ -122,25 +125,31 @@ public class ImageDBHbase extends Configured implements Tool{
 	}
 		public int run(String[] args) throws Exception
 		{	
-
+				String tablename = "colorJu";
+			  String[] familys = {"id","hsv"};
+            HBaseDB.creatTable(tablename, familys);
 			// Read in the configurations
 			if (args.length < 2)
 			{
 				System.out.println("Usage: im2gray <inputdir> <outputdir> <input type: hib, har, sequence, small_files>");
 				System.exit(0);
 			}
-
-
+			
+	            
+     
 			// Setup configuration
 			Configuration conf = new Configuration();
-
+             
 			// set the dir to output the jpegs to
 			String inputPath = args[0];
 			String outputPath = args[1];
 			
 			conf.setStrings("imageDBSearch.outdir", outputPath);
 
+			
 			Job job = new Job(conf, "imageDBSearch");
+			
+			
 			job.setJarByClass(ImageDBHbase.class);
 			job.setMapperClass(MyMapper.class);
 			job.setReducerClass(MyReducer.class);
@@ -168,6 +177,13 @@ public class ImageDBHbase extends Configured implements Tool{
 			}
 		}
 		public static void main(String[] args) throws Exception {
+			String tablename = "colorJu";
+			  String[] familys = {"id", "hsv"};
+			 try {
+	            	
+	            	HBaseDB.creatTable(tablename, familys);
+	            }
+	           catch(Exception e){}
 			int res = ToolRunner.run(new ImageDBHbase(), args);
 			System.exit(res);
 		}
