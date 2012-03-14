@@ -68,8 +68,6 @@ public abstract class AbstractImageBundle {
 	 * @throws IOException
 	 */
 	public final void open(int mode, boolean overwrite) throws IOException {
- System.out.println("open!!!!!!!!!!!!!!!!!!!1");
-
 
 		if (_fileMode == -1 && mode == FILE_MODE_WRITE) {			
 			// Check to see whether the file exists

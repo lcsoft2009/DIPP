@@ -7,18 +7,14 @@ import hipi.imagebundle.mapreduce.ImageBundleInputFormat;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -27,15 +23,15 @@ import org.apache.hadoop.util.ToolRunner;
 import com.liangchu.hbase.HBaseDB;
 import com.liangchu.image.FqImage;
 public class ImageDBHbase extends Configured implements Tool{
-
-	public static class MyMapper extends Mapper<ImageHeader, FloatImage, IntWritable, Text>
+	String[] familys = {"id","hsv",""};
+	private	static String tablename = "imageDB";
+	public static class MyMapper extends Mapper<ImageHeader, FloatImage, Text, Text>
 	{
 		
 		private Path path;
 		private FileSystem fileSystem;
 		private Configuration conf;
-		private	static String tablename = "imageDB";
-	//	private  String[] familys = {"id","hsv"};
+		
 
 		public void setup(Context jc) throws IOException
 		{
@@ -46,8 +42,7 @@ public class ImageDBHbase extends Configured implements Tool{
 		}
 		public void map(ImageHeader key, FloatImage value, Context context) throws IOException, InterruptedException{
 			if (value != null) {
-	
-				
+					String hashval = value.hex();
 					BufferedImage bufferedImage = new BufferedImage(value.getWidth()/10, value.getHeight()/10, BufferedImage.TYPE_INT_RGB);
 					float[] data = value.getData();
 					int[] rgb = new int[value.getWidth() * value.getHeight()];
@@ -72,17 +67,16 @@ public class ImageDBHbase extends Configured implements Tool{
 				String colorJuV3 = Double.toString(imh.colorJuV[3]);
 				
 				  //add record 
-int id=key.hashCode();
 	            try {
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","h1",colorJuH1);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","h2",colorJuH2);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","h3",colorJuH3);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","s1",colorJuS1);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","s2",colorJuS2);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","s3",colorJuS3);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","v1",colorJuV1);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","v2",colorJuV2);
-		            HBaseDB.addRecord(tablename,String.valueOf(id),"hsv","v3",colorJuV3);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","h1",colorJuH1);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","h2",colorJuH2);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","h3",colorJuH3);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","s1",colorJuS1);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","s2",colorJuS2);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","s3",colorJuS3);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","v1",colorJuV1);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","v2",colorJuV2);
+		            HBaseDB.addRecord(tablename,String.valueOf(hashval),"hsv","v3",colorJuV3);
 		       //     System.out.println("===========show all record========");
 		        //    HBaseDB.getAllRecord(tablename);
 				} catch (Exception e) {
@@ -91,42 +85,14 @@ int id=key.hashCode();
 				}
 		
 				
-				context.write(new IntWritable(0), new Text(" "+colorJuH1+" "+colorJuH2+" "+colorJuH3+" "+colorJuS1+" "+colorJuS2+" "+colorJuS3+" "+colorJuV1+" "+colorJuV2+" "+colorJuV3));
+				context.write(new Text(hashval), new Text(" "+colorJuH1+" "+colorJuH2+" "+colorJuH3+" "+colorJuS1+" "+colorJuS2+" "+colorJuS3+" "+colorJuV1+" "+colorJuV2+" "+colorJuV3));
 			}
 		}
 	}
-	public static class MyReducer extends Reducer<IntWritable, Text, IntWritable, Text> {
-		// Just the basic indentity reducer... no extra functionality needed at this time
-		private FileSystem fileSystem;
-		private Path path;
-		private ImageHeader head;
-		private Configuration conf;
 
-		public void setup(Context jc) throws IOException
-		{
-			conf = jc.getConfiguration();
-			fileSystem = FileSystem.get(conf);
-			path = new Path( conf.get("imageDBSearch.outdir"));
-			fileSystem.mkdirs(path);
-
-			//int id=value.hashCode();
-           
-            	
-		}
-		
-		public void reduce(IntWritable key, Iterable<Text> values, Context context)
-		throws IOException, InterruptedException
-		{
-			for (Text value : values) {
-				context.write(key, value);
-			}
-		}
-		
-	}
 		public int run(String[] args) throws Exception
 		{	
-				String tablename = "colorJu";
-			  String[] familys = {"id","hsv"};
+			  
             HBaseDB.creatTable(tablename, familys);
 			// Read in the configurations
 			if (args.length < 2)
@@ -152,10 +118,9 @@ int id=key.hashCode();
 			
 			job.setJarByClass(ImageDBHbase.class);
 			job.setMapperClass(MyMapper.class);
-			job.setReducerClass(MyReducer.class);
 
 			// Set formats     
-			job.setOutputKeyClass(IntWritable.class);
+			job.setOutputKeyClass(Text.class);
 			job.setOutputValueClass(Text.class);
 			job.setInputFormatClass(ImageBundleInputFormat.class);
 			// Set out/in paths

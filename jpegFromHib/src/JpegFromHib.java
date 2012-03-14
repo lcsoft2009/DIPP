@@ -1,6 +1,5 @@
 
 
-import hipi.image.ImageHeader.ImageType;
 import hipi.imagebundle.mapreduce.ImageBundleInputFormat;
 import hipi.util.ByteUtils;
 
@@ -11,9 +10,7 @@ import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.BytesWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
-import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -24,7 +21,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 public class JpegFromHib extends Configured implements Tool{
 
-	public static class MyMapper extends Mapper<NullWritable, BytesWritable, LongWritable, Text>
+	public static class MyMapper extends Mapper<NullWritable, BytesWritable, Text, Text>
 	{
 		public Path path;
 		public FileSystem fileSystem;
@@ -39,8 +36,10 @@ public class JpegFromHib extends Configured implements Tool{
 		throws IOException, InterruptedException{
 			if(value == null)
 				return;
+			System.out.println(value);
+			System.out.println(value.getLength());
 			byte[] val = value.getBytes();
-			
+		
 			String hashval = ByteUtils.asHex(val);
 		    
 			Path outpath = new Path(path + "/" + hashval + ".jpg");
@@ -49,13 +48,13 @@ public class JpegFromHib extends Configured implements Tool{
 			os.flush();
 			os.close();
 			
-			long sig = 0<<2 | ImageType.JPEG_IMAGE.toValue();
+		//	long sig = 0<<2 | ImageType.JPEG_IMAGE.toValue();
 			
 			//if you want the images to be output as a sequence file, emit the line below
 			//and change the output key and values appropriately
-			context.write(new LongWritable(sig), new Text(hashval));
+			//context.write(new LongWritable(sig), value);
 			
-			//context.write(new BooleanWritable(true), new Text(hashval));
+			context.write(new Text(hashval), new Text("hsv"));
 		}
 	}
 
@@ -84,7 +83,7 @@ public class JpegFromHib extends Configured implements Tool{
 		job.setReducerClass(Reducer.class);
 
 		// Set formats
-		job.setOutputKeyClass(LongWritable.class);
+		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);       
 		//job.setOutputFormatClass(SequenceFileOutputFormat.class);
 

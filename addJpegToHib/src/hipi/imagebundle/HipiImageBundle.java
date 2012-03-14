@@ -458,7 +458,7 @@ public class HipiImageBundle extends AbstractImageBundle {
 	 * Implemented with {@link HipiImageBundle.FileReader#getCurrentValue()}
 	 */
 	@Override
-	protected FloatImage readImage() throws IOException {
+	public FloatImage readImage() throws IOException {
 		return _reader.getCurrentValue();
 	}
 

@@ -1,5 +1,6 @@
 
 
+import hipi.image.FloatImage;
 import hipi.image.ImageHeader.ImageType;
 import hipi.imagebundle.HipiImageBundle;
 
@@ -8,14 +9,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URL;
-import java.net.URLConnection;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.BooleanWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -45,7 +43,7 @@ import org.apache.hadoop.util.ToolRunner;
 public class addJpegToHib extends Configured implements Tool{
 
 	
-	public static class addJpegToHibMapper extends Mapper<IntWritable, Text, BooleanWritable, Text>
+	public static class DownloaderMapper extends Mapper<IntWritable, Text, Text, Text>
 	{
 		private static Configuration conf;
 		// This method is called on every node
@@ -57,23 +55,66 @@ public class addJpegToHib extends Configured implements Tool{
 		public void map(IntWritable key, Text value, Context context) 
 		throws IOException, InterruptedException
 		{
-			//System.err.println("> Took yyyyyyyyyyyyyyyyyyy");				
-			String temp_path = conf.get("addJpegToHib.outpath") + key.get() + ".hib.tmp";
-			System.err.println("Temp path: " + temp_path);
+			String temp_path = conf.get("downloader.outpath") + key.get() + ".hib.tmp";
+			System.out.println("Temp path: " + temp_path);
 			
 			HipiImageBundle hib = new HipiImageBundle(new Path(temp_path), conf);
 			hib.open(HipiImageBundle.FILE_MODE_WRITE, true);
 
-	//add local image to hib
-			for( int it = 1 ; it <= 13; it++ ){
-		  	File file = new File("/home/hadoop/Desktop/image/"+it+".jpg");
-			  FileInputStream fis = new FileInputStream(file);
-			  hib.addImage(fis, ImageType.JPEG_IMAGE);
+			String word = value.toString();
+
+			BufferedReader reader = new BufferedReader(new StringReader(word));
+			String uri;
+			int i = key.get();
+			int iprev = i;
+			while((uri = reader.readLine()) != null)			
+			{
+				if(i >= iprev+100) {
+					hib.close();
+					context.write(new Text(value), new Text(hib.getPath().toString()));
+					temp_path = conf.get("downloader.outpath") + i + ".hib.tmp";
+					hib = new HipiImageBundle(new Path(temp_path), conf);
+					hib.open(HipiImageBundle.FILE_MODE_WRITE, true);
+					iprev = i;
+				}
+				long startT=0;
+				long stopT=0;	   
+				startT = System.currentTimeMillis();	    	    
+
+				try {
+					// Attempt to addJpeg
+					context.progress();
+					File file = new File(uri);
+					FileInputStream fis = new FileInputStream(file);
+					hib.addImage(fis, ImageType.JPEG_IMAGE);
+				
+				} catch(Exception e)
+				{
+					e.printStackTrace();
+					System.err.println("Error... probably cluster downtime");
+					try
+					{
+						Thread.sleep(1000);			    
+					} catch (InterruptedException e1)
+					{
+						e1.printStackTrace();
+					}
+				}
+
+				i++;
+				
+				// Emit success
+				stopT = System.currentTimeMillis();
+				float el = (float)(stopT-startT)/1000.0f;
+				System.err.println("> Took " + el + " seconds\n");				
 			}
+
+
 			try
 			{
+				reader.close();
 				hib.close();
-				context.write(new BooleanWritable(true), new Text(hib.getPath().toString()));
+				//context.write(new Text(value), new Text(hib.getPath().toString()));
 			} catch (Exception e)
 			{
 				e.printStackTrace();
@@ -82,7 +123,7 @@ public class addJpegToHib extends Configured implements Tool{
 		}
 	}
 
-	public static class DownloaderReducer extends Reducer<BooleanWritable, Text, BooleanWritable, Text> {
+	public static class DownloaderReducer extends Reducer<Text, Text, Text, Text> {
 
 		private static Configuration conf;		
 		public void setup(Context jc) throws IOException
@@ -90,12 +131,12 @@ public class addJpegToHib extends Configured implements Tool{
 			conf = jc.getConfiguration();
 		}
 
-		public void reduce(BooleanWritable key, Iterable<Text> values, Context context) 
+		public void reduce(Text key, Iterable<Text> values, Context context) 
 		throws IOException, InterruptedException
 		{
-			if(key.get()){
+			
 				FileSystem fileSystem = FileSystem.get(conf);
-				HipiImageBundle hib = new HipiImageBundle(new Path(conf.get("addJpegToHib.outfile")), conf);
+				HipiImageBundle hib = new HipiImageBundle(new Path(conf.get("downloader.outfile")), conf);
 				hib.open(HipiImageBundle.FILE_MODE_WRITE, true);
 				for (Text temp_string : values) {
 					Path temp_path = new Path(temp_string.toString());
@@ -108,9 +149,9 @@ public class addJpegToHib extends Configured implements Tool{
 					fileSystem.delete(index_path, false);
 					fileSystem.delete(data_path, false);
 					
-					context.write(new BooleanWritable(true), new Text(input_bundle.getPath().toString()));
+					context.write(new Text(key), new Text(hib.getPath().toString()));
 					context.progress();
-				}
+				
 				hib.close();
 			}
 		}
@@ -138,22 +179,22 @@ public class addJpegToHib extends Configured implements Tool{
 		System.out.println("Output HIB: " + outputPath);
 		
 		
-		//conf.setInt("downloader.nodes", nodes);
-		conf.setStrings("addJpegToHib.outfile", outputFile);
-		conf.setStrings("addJpegToHib.outpath", outputPath);
+		conf.setInt("downloader.nodes", nodes);
+		conf.setStrings("downloader.outfile", outputFile);
+		conf.setStrings("downloader.outpath", outputPath);
 
-		Job job = new Job(conf, "addJpegToHib");
+		Job job = new Job(conf, "downloader");
 		job.setJarByClass(addJpegToHib.class);
-		job.setMapperClass(addJpegToHibMapper.class);
+		job.setMapperClass(DownloaderMapper.class);
 		job.setReducerClass(DownloaderReducer.class);
 
 		// Set formats
-		job.setOutputKeyClass(BooleanWritable.class);
+		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);       
 		job.setInputFormatClass(DownloaderInputFormat.class);
 
 		//*************** IMPORTANT ****************\\
-		job.setMapOutputKeyClass(BooleanWritable.class);
+		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
 		FileOutputFormat.setOutputPath(job, new Path(outputFile + "_output"));
 

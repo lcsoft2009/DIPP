@@ -138,8 +138,8 @@ public class HBaseDB {
     
     public static void  main (String [] agrs) {
         try {
-            String tablename = "scores";
-            String[] familys = {"grade", "course"};
+            String tablename = "imageDB";
+       /*     String[] familys = {"grade", "course"};
             HBaseDB.creatTable(tablename, familys);
              
             //add record zkb
@@ -160,7 +160,7 @@ public class HBaseDB {
             System.out.println("===========del one record========");
             HBaseDB.delRecord(tablename, "baoniu");
             HBaseDB.getAllRecord(tablename);
-             
+         */    
             System.out.println("===========show all record========");
             HBaseDB.getAllRecord(tablename);
         } catch (Exception e) {

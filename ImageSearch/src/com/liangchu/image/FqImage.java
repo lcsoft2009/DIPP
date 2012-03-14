@@ -1,11 +1,7 @@
 package com.liangchu.image;
 
-import hipi.image.FloatImage;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.DirectColorModel;
-import java.awt.image.WritableRaster;
 public class FqImage {
 
 	public static final double SOBELDOOR = 80.00;

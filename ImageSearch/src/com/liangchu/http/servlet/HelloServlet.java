@@ -111,10 +111,10 @@ public class HelloServlet extends HttpServlet {
 		
 		String[] url = new String[100];
 		
-		 String tablename = "dis";
+		 String tableName = "searchResult";
          String[] familys = {"id", "data"};
          try {
-			HBaseDB.creatTable(tablename, familys);
+			HBaseDB.creatTable(tableName, familys);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -134,11 +134,11 @@ public class HelloServlet extends HttpServlet {
 				double[] colorJuH = new double[4];
 				double[] colorJuS = new double[4];
 				double[] colorJuV = new double[4];
-				Get get = new Get(kv[0].getRow());
-				get.addColumn(Bytes.toBytes("url"), Bytes.toBytes(""));
-				url[counter] = Bytes.toString(table.get(get).list().get(0).getValue());
+		
 			
-				System.out.println(Bytes.toString(table.get(get).list().get(0).getValue()));
+				String id = new String(kv[0].getRow());
+                System.out.println(id);
+				
 				Get get1 = new Get(kv[0].getRow());
 				get1.addColumn(Bytes.toBytes("hsv"), Bytes.toBytes("h1"));	
 				hsv[0] = Double.parseDouble(new String(table.get(get1).list().get(0).getValue()));
@@ -177,11 +177,7 @@ public class HelloServlet extends HttpServlet {
 				get9.addColumn(Bytes.toBytes("hsv"), Bytes.toBytes("v3"));	
 				hsv[8] = Double.parseDouble(new String(table.get(get9).list().get(0).getValue()));
 				
-		
-			//	for(int i=0;i<9;i++)
-			//	System.out.println(hsv[i]);
-				
-	//		System.out.println(hsv[0]);
+
 			for (int i = 0; i < hsv.length; i++) {
 				if (i >= 1 && i <= 3) {
 					colorJuH[i] = hsv[i];
@@ -197,7 +193,7 @@ public class HelloServlet extends HttpServlet {
 			imageDis[counter] = dColorJu(imh, colorJuH, colorJuS, colorJuV);
 	//		System.out.println(imageDis[counter]);
 			try {
-				HBaseDB.addRecord("dis",String.valueOf(imageDis[counter]),"id","",url[counter]);
+				HBaseDB.addRecord(tableName,String.valueOf(imageDis[counter]),"id","",id);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -209,22 +205,23 @@ public class HelloServlet extends HttpServlet {
 
 		long time2 = System.currentTimeMillis();
 		double diff = (time2 - time1) / 1000.0;
-		HTable table2 = new HTable("dis");
+		HTable table2 = new HTable(tableName);
 		Scan ds = new Scan();
 		ResultScanner dis = table2.getScanner(ds);
 		 for(Result r:dis){
       	 KeyValue[] kv=r.raw();
-      	 System.out.println("ssssssssss     "+kv.length);
       	out.println("<p>"+new String(kv[0].getRow())+" ---------> "+new String(kv[0].getValue())+"</p>");
 		 }
+		 
+		  try {
+			HBaseDB.deleteTable(tableName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		  
 		out.println("<p>Search Time: " + diff + "seconds </p>");
 		System.out.println("Search Time: " + diff + "seconds ");
-	        
-	        
-	        
-	        
-	        
-	        
+	  
 	}
 
 	public double dColorJu(FqImage imh, double[] colorJuH, double[] colorJuS,
